@@ -1,0 +1,56 @@
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4" style="user-select: none;">
+        <h3>COMPAÑIAS</h3>
+    </div>
+    <div class="card shadow">
+        <div class="card-body" style="user-select: none;">
+            <table class="table table-hover align-middle text-center">
+                <thead class="table-dark">
+                    <tr>                     
+                        <th (click)="ordenarCompanias('nombre')">
+                            NOMBRE
+                            <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='nombre' && sortDirection==='asc', 'bi-caret-down-fill':
+                             sortColumn==='nombre' && sortDirection==='desc'}"></i>
+                        </th>
+                        <th (click)="ordenarCompanias('apellido')">
+                            APELLIDO
+                            <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='apellido' && sortDirection==='asc', 'bi-caret-down-fill':
+                             sortColumn==='apellido' && sortDirection==='desc'}"></i>
+                        </th>
+                        <th (click)="ordenarCompanias('numEmpleado')">
+                            NUM DE EMPLEADO
+                            <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='numEmpleado' && sortDirection==='asc', 'bi-caret-down-fill':
+                             sortColumn==='numEmpleado' && sortDirection==='desc'}"></i>
+                        </th>
+                        <th (click)="ordenarCompanias('rfc')">
+                            RFC
+                            <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='rfc' && sortDirection==='asc', 'bi-caret-down-fill':
+                             sortColumn==='rfc' && sortDirection==='desc'}"></i>
+                        </th>
+                        <th>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (compania of companias; track $index) {
+                    <tr>                        
+                        <td> {{compania.nombre}} </td>
+                        <td> {{compania.apellido}} </td>
+                        <td> {{compania.numEmpleado}} </td>
+                        <td> {{compania.rfc}} </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" (click)="eliminar(compania.numEmpleado)">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                            <button class="btn btn-lg btn-warning btn-sm" (click)="editar(compania)">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    }@empty{
+                    <td class="text-center" colspan="5"> No hay compañias registrados</td>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

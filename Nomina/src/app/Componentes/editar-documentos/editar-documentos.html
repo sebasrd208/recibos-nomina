@@ -1,0 +1,40 @@
+<div class="container d-flex justify-content-center align-items-center mt-3">
+    <div class="card shadow p-4" style="width:400px; user-select: none;">
+        <h3 class="text-center mb-4"> ACTUALIZACIÓN DE DOCUMENTOS </h3>
+
+        <form (ngSubmit)="editar()">
+            <div class="mb-3">
+                <label class="form-label">NOMBRE: </label>
+                <input type="text" class="form-control" [(ngModel)]="document.idDocumento" name="idDocumento" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">NOMBRE: </label>
+                <input type="text" class="form-control" [(ngModel)]="document.nombre" name="nombre" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">APELLIDO: </label>
+                <input type="text" class="form-control" [(ngModel)]="document.apellido" name="apellido" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">NUMERO DE EMPLEADO: </label>
+                <input type="number" class="form-control" [(ngModel)]="document.numEmpleado" name="numEmpleado" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">CORREO:</label>
+                <input type="text" class="form-control" [(ngModel)]="document.correo" name="correo">
+            </div>
+
+            <button class="btn btn-primary w-100 mb-3">
+                <i class="bi bi-pencil-square me-2"></i> Actualizar documento
+            </button>
+
+            <button class="btn btn-danger w-100 mb-3" (click)="cancelar()">
+                <i class="bi bi-x-circle me-2"></i> Cancelar
+            </button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,93 @@
+<div class="container mt-5">
+    <div class="mb-2" style="user-select: none;">
+        <h3 class="mb-3">DOCUMENTO</h3>
+        <div class="d-flex justify-content-end align-items-center gap-3">            
+            <button class="btn btn-success" (click)="enviarPendientes()" [disabled]="!hayPendientes()">
+                ENVIAR PENDIENTES
+            </button>
+            <select class="form-select w-auto" [(ngModel)]="filtroEstado">
+                <option value="">TODOS</option>
+                <option value="0">PENDIENTE</option>
+                <option value="1">ENVIADO</option>
+                <option value="2">ERROR</option>
+            </select>
+            <h3 class="text-muted m-0">
+                {{ textoFiltroDocumentos }}
+            </h3>
+        </div>
+    </div>
+    <div class="card shadow">
+        <div class="card-body" style="user-select: none;">
+            <table class="table table-hover align-middle text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th (click)="ordenarDocumentos('idDocumento')">
+                            ID
+                            <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='idDocumento' && sortDirection==='asc', 'bi-caret-down-fill':
+                             sortColumn==='idDocumento' && sortDirection==='desc'}"></i>
+                        </th>
+                        <th (click)="ordenarDocumentos('nombre')">
+                            NOMBRE
+                            <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='nombre' && sortDirection==='asc', 'bi-caret-down-fill':
+                             sortColumn==='nombre' && sortDirection==='desc'}"></i>
+                        </th>
+                        <th (click)="ordenarDocumentos('apellido')">
+                            APELLIDO
+                            <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='apellido' && sortDirection==='asc', 'bi-caret-down-fill':
+                             sortColumn==='apellido' && sortDirection==='desc'}"></i>
+                        </th>
+                        <th (click)="ordenarDocumentos('numEmpleado')">
+                            NUM DE EMPLEADO
+                            <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='numEmpleado' && sortDirection==='asc', 'bi-caret-down-fill':
+                             sortColumn==='numEmpleado' && sortDirection==='desc'}"></i>
+                        </th>
+                        <th (click)="ordenarDocumentos('correo')">
+                            CORREO
+                            <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='correo' && sortDirection==='asc', 'bi-caret-down-fill':
+                             sortColumn==='correo' && sortDirection==='desc'}"></i>
+                        </th>
+                        <th (click)="ordenarDocumentos('status')">
+                            ESTADO
+                            <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='status' && sortDirection==='asc', 'bi-caret-down-fill':
+                             sortColumn==='status' && sortDirection==='desc'}"></i>
+                        </th>
+                        <th>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (documento of documentosFiltrados(); track documento.idDocumento) {
+                    <tr>
+                        <td> {{documento.idDocumento}} </td>
+                        <td> {{documento.nombre}} </td>
+                        <td> {{documento.apellido}} </td>
+                        <td> {{documento.numEmpleado}} </td>
+                        <td> {{documento.correo}} </td>
+                        <td>
+                            {{
+                            documento.status === '0' ? 'PENDIENTE' :
+                            documento.status === '1' ? 'ENVIADO' :
+                            documento.status === '2' ? 'ERROR' :
+                            'DESCONOCIDO'
+                            }}
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" (click)="eliminar(documento.numEmpleado)">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                            <button class="btn btn-lg btn-warning btn-sm" (click)="enviar(documento.numEmpleado)"
+                                [disabled]="documento.status === '1'">
+                                <i class="bi bi-send"></i>
+                            </button>
+                            <button class="btn btn-lg btn-warning btn-sm" (click)="editar(documento)">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    }@empty{
+                    <td class="text-center" colspan="5"> No hay documentos registrados</td>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

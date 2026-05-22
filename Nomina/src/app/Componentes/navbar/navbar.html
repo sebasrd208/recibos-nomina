@@ -1,0 +1,150 @@
+@if(isLoggedIn()){
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-lg px-5 py-3
+                border-bottom border-2 border-primary" style="min-height: 80px; user-select: none;">
+
+        <a class="navbar-brand fw-bold text-dark fs-3 d-flex align-items-center gap-2" routerLink="/listar-companias">
+
+            <div class="logo-container position-relative">
+                <div class="logo-bg bg-primary rounded-circle d-flex align-items-center
+                            justify-content-center" style="width: 42px; height: 42px;">
+
+                    <i class="bi bi-shop text-white fs-5"></i>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column">
+                <span class="fw-bold" style="font-size: 1.4rem; letter-spacing: 0.5px;" >
+                    RECIBOS NOMINA
+                </span>
+
+                <span class="text-muted" style="font-size: 0.75rem; letter-spacing: 1px;">
+                    PANEL DE RECIBOS
+                </span>
+            </div>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+            aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav ms-auto gap-4 align-items-center" style="font-weight: 500;">
+
+                <li class="nav-item position-relative">
+                    <a class="nav-link d-flex align-items-center gap-3 py-2 rounded-3" routerLink="/listar-documentos"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
+
+                        <div class="icon-container bg-light-primary d-flex
+                                    align-items-center justify-content-center rounded-2"
+                            style="width: 40px; height: 40px;">
+
+                            <i class="bi bi-file-earmark-text text-primary fs-5"></i>
+                        </div>
+
+                        <div class="d-flex flex-column">
+                            <span class="fw-medium">
+                                Documentos
+                            </span>
+
+                            <span class="text-muted" style="font-size: 0.75rem;">
+                                Gestión de Documentos
+                            </span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+
+                    <a class="nav-link d-flex align-items-center gap-3 px-2 py-2 rounded-3" routerLink="/listar-empleados"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
+
+                        <div class="icon-container bg-light-success d-flex
+                                    align-items-center justify-content-center rounded-2"
+                            style="width: 40px; height: 40px;">
+
+                            <i class="bi bi-people text-success fs-5"></i>
+                        </div>
+
+                        <div class="d-flex flex-column">
+
+                            <span class="fw-medium">
+                                Empleados
+                            </span>
+
+                            <span class="text-muted" style="font-size: 0.75rem;">
+                                Administrar empleados
+                            </span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+
+                    <a class="nav-link d-flex align-items-center gap-3 px-2 py-2 rounded-3" routerLink="/listar-companias"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
+
+                        <div class="icon-container bg-light-success d-flex
+                                    align-items-center justify-content-center rounded-2"
+                            style="width: 40px; height: 40px;">
+
+                            <i class="bi bi-buildings text-success fs-5"></i>
+                        </div>
+
+                        <div class="d-flex flex-column">
+                            <span class="fw-medium">
+                                Compañias
+                            </span>
+                            <span class="text-muted" style="font-size: 0.75rem;">
+                                Gestor de compañias
+                            </span>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="nav-item ms-4 ps-4 border-start dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center
+                            gap-3 px-2 py-1 rounded-3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="position-relative">
+                            <div class="profile-pic bg-primary d-flex
+                                        align-items-center justify-content-center
+                                        rounded-circle" style="width: 45px; height: 45px;">
+                                <i class="bi bi-person-fill text-white fs-5"></i>
+                            </div>
+                            <span class="position-absolute bottom-0 end-0
+                                        translate-middle p-1 bg-success
+                                        border border-2 border-white rounded-circle" style="width: 12px; height: 12px;">
+                            </span>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <span class="fw-medium">
+                                {{ username }}
+                            </span>
+                            <span class="text-muted" style="font-size: 0.75rem;">
+                            </span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3 mt-2">
+                        <li>
+                            <button class="dropdown-item d-flex align-items-center gap-2 text-danger" (click)="logout()">
+                                <i class="bi bi-box-arrow-right"></i>
+                                Cerrar sesión
+                            </button>
+                        </li>
+                        <li>
+                            <button class="dropdown-item d-flex align-items-center gap-2 text-danger" (click)="registro()">
+                                <i class="bi bi-plus-square"></i>
+                                Crear usuario
+                            </button>
+                        </li>
+                        <li>
+                            <button class="dropdown-item d-flex align-items-center gap-2 text-danger" (click)="nuevo()">
+                                <i class="bi bi-person-plus text-success fs-5"></i>
+                                Agregar un nuevo empleado
+                            </button>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+}

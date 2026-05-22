@@ -1,0 +1,74 @@
+CREATE OR REPLACE PACKAGE BODY PA_COMPANIA AS
+    PROCEDURE SP_GETCOMPANIA(
+        REC_CURSOR OUT SYS_REFCURSOR
+    )AS
+    BEGIN
+        OPEN REC_CURSOR FOR
+            SELECT * FROM TA_COMPANIA
+            ORDER BY ID_COMPANIA;
+    END SP_GETCOMPANIA;
+
+    PROCEDURE SP_SETCOMPANIA(        
+        PA_NOMBRE      IN VARCHAR2,
+        PA_APELLIDO    IN VARCHAR2,
+        PA_RFC         IN VARCHAR2,
+        PA_EMPRESA     IN VARCHAR2,
+        PA_NOTA        IN CLOB,
+        PA_TRIMESTRE   IN VARCHAR2
+    )AS        
+        v_trimestre NUMBER;
+        v_dummy  NUMBER;
+    BEGIN
+        IF PA_NOMBRE IS NULL OR PA_APELLIDO IS NULL OR PA_EMPRESA IS NULL OR
+        PA_NOTA IS NULL THEN
+            RAISE_APPLICATION_ERROR(-20001, 'NO SE PERMITEN REGISTROS VACÍOS');
+        ELSIF NOT REGEXP_LIKE(PA_TRIMESTRE, '^[0-9]+$') THEN
+            RAISE_APPLICATION_ERROR(-20002, 'EL TRIMESTRE INGRESADO ES INVÁLIDO');
+        ELSE
+            SELECT 1
+            INTO v_dummy
+            FROM TA_COMPANIA
+            WHERE UPPER(NOMBRE) = UPPER(PA_NOMBRE)
+              AND UPPER(APELLIDO) = UPPER(PA_APELLIDO);
+                          
+            v_trimestre := TO_NUMBER(PA_TRIMESTRE);
+            UPDATE TA_COMPANIA SET RFC=PA_RFC, COMPANIA=PA_EMPRESA,
+            NOTA=PA_NOTA, TRIMESTRE=v_trimestre WHERE UPPER(NOMBRE) = UPPER(PA_NOMBRE) AND
+            UPPER(APELLIDO) = UPPER(PA_APELLIDO);
+        END IF;
+        
+        EXCEPTION
+            WHEN NO_DATA_FOUND THEN
+                RAISE_APPLICATION_ERROR(-20004, 'EL EMPLEADO NO EXISTE');                    
+    END SP_SETCOMPANIA;
+    
+    PROCEDURE SP_GETEMPLEADO(
+        REC_CURSOR   OUT SYS_REFCURSOR,
+        PA_EMPLEADO  IN VARCHAR2
+    )AS
+        v_empleado NUMBER;
+        v_dummy  NUMBER;
+    BEGIN
+        IF PA_EMPLEADO IS NULL THEN
+            RAISE_APPLICATION_ERROR(-20001, 'NO SE PERMITEN REGISTROS VACÍOS');
+        ELSIF NOT REGEXP_LIKE(PA_EMPLEADO, '^[0-9]+$') THEN
+            RAISE_APPLICATION_ERROR(-20002, 'EL NUMERO DE EMPLEADO TIENE QUE SER NÚMERICO');
+        ELSE
+            v_empleado := TO_NUMBER(PA_EMPLEADO); 
+            
+            SELECT 1
+            INTO v_dummy
+            FROM TA_COMPANIA
+            WHERE NUM_EMPLEADO = v_empleado;
+            
+            OPEN REC_CURSOR FOR
+                SELECT * FROM TA_COMPANIA 
+                WHERE NUM_EMPLEADO = v_empleado
+                ORDER BY ID_COMPANIA;
+        END IF;
+        
+        EXCEPTION
+            WHEN NO_DATA_FOUND THEN
+                RAISE_APPLICATION_ERROR(-20003, 'EL EMPLEADO NO EXISTE');
+    END SP_GETEMPLEADO;
+END PA_COMPANIA;

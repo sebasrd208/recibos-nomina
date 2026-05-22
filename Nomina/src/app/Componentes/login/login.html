@@ -1,0 +1,49 @@
+<div class="auth-container">
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow p-4" style="width: 450px; user-select: none;">
+            <div class="card-body p-5">
+                <h2 class="fw-bold text-secondary text-center mb-2">
+                    Iniciar sesion
+                </h2>
+
+                <p class="text-center text-muted mb-4">
+                    Acceso a Recibos Nómina
+                </p>
+
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold"> Usuario </label>
+                        <input type="text" class="form-control form-control-lg" name="username"
+                            placeholder="Ingresa el usuario" [(ngModel)]="username">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold"> Contraseña: </label>
+                        <input [type]="showPassword ? 'text' : 'password'" class="form-control form-control-lg"
+                            name="password" placeholder="Ingresa la contraseña" [(ngModel)]="password">
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="showPasswordCheck"
+                            [(ngModel)]="showPassword" name="showPassword">
+                        <label class="form-check-label" for="showPasswordCheck">
+                            {{showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}}
+                        </label>
+                    </div>
+
+                    <div class="d-grid mb-4">
+                        <button class="btn btn-primary btn-lg shadow-sm" type="button" (click)="login()">
+                            Entrar
+                        </button>
+                    </div>
+                    <p class="text-center text-muted mb-0">
+                        ¿No tiene una cuenta?
+                        <a class="text-dark fw-bold" style="cursor: pointer;" (click)="registro()">
+                            Registrate aqui
+                        </a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
