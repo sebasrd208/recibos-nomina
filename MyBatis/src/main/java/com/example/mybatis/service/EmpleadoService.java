@@ -60,8 +60,7 @@ public class EmpleadoService {
         params.put("PA_EMPLEADO", numEmpleado);
         mapeo.SP_DEDUCCIONES(params);
         List<DeduccionesDTO> deducciones = (List<DeduccionesDTO>) params.get("rec_cursor");
-
-
+        
         params.clear();
         params.put("PA_EMPLEADO", numEmpleado);
         mapeo.SP_IMPUESTOS(params);
