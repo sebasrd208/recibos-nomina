@@ -27,11 +27,11 @@ public class EnvioController {
         return ResponseEntity.ok(resultado);
     }
 
-    @PatchMapping("/neto/pdf")
+    @PatchMapping("/sueldo/pdf")
     @Operation(summary = "Mostrar sueldo neto", description = "Muestra un sueldo neto de un empleado especifico")
-    public ResponseEntity<?> generarPdf(@RequestParam String numEmpleado, HttpServletResponse response) {
+    public ResponseEntity<?> generarPdfSueldo(@RequestParam String numEmpleado, HttpServletResponse response) {
         try {
-            byte[] pdfBytes = servicio.generatePdfSueldo(numEmpleado);
+            byte[] pdfBytes = servicio.generatePdfSueldoNeto(numEmpleado);
 
             if (pdfBytes == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -56,8 +56,7 @@ public class EnvioController {
             EnvioDTO resultado = servicio.procesoEnvioCorreoPorEmpleado(numEmpleado);
             return ResponseEntity.ok(resultado);
         }catch(Exception s){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(s.getMessage());
-            //return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(s.getCause().getMessage().lines().findFirst().orElse("").trim());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(s.getCause().getMessage().lines().findFirst().orElse("").trim());
         }
     }
 }

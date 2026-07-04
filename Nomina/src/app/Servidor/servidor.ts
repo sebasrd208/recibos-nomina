@@ -85,7 +85,7 @@ export class Servidor {
 
   obtenerPDF(numEmpleado: string) {
     return this.http.patch(
-      this.url + '/envios-num/neto/pdf',
+      this.url + '/envios-num/sueldo/pdf',
       null,
       {
         params: {

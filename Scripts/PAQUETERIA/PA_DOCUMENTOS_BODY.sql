@@ -35,6 +35,99 @@ CREATE OR REPLACE PACKAGE BODY PA_DOCUMENTO AS
         WHEN OTHERS THEN
             RAISE_APPLICATION_ERROR(-20099, 'ERROR INESPERADO: ' || SQLERRM);            
     END SP_GET_STATUS_EMPLEADO;
+    
+    PROCEDURE SP_GETEMPLEADO(
+        REC_CURSOR OUT SYS_REFCURSOR,
+        PA_EMPLEADO    IN VARCHAR2
+    )AS
+        v_empleado NUMBER;
+        v_dummy     NUMBER;
+    BEGIN
+        IF TRIM(PA_EMPLEADO) IS NULL THEN
+            RAISE_APPLICATION_ERROR(-20000, 'NO SE PERMITEN ESPACIOS VACIOS');
+        ELSIF NOT REGEXP_LIKE(PA_EMPLEADO, '^[0-9]+$') THEN
+            RAISE_APPLICATION_ERROR(-20000, 'EL NUMERO DE EMPLEADO TIENE QUE SER NÚMERICO');
+        ELSE
+            v_empleado := TO_NUMBER(PA_EMPLEADO);    
+            SELECT e.NUM_EMPLEADO
+            INTO v_dummy
+            FROM TA_EMPLEADO e
+            WHERE e.NUM_EMPLEADO = v_empleado;
+    
+            OPEN REC_CURSOR FOR
+                WITH base AS (
+                    SELECT                
+                        e.NOMBRE,
+                        e.SUELDO,
+                        (e.SUELDO * 3) AS SUELDO_BRUTO_NUM,
+                        c.NOMBRE AS NOMBRE_COMPANIA,
+                        c.APELLIDO,
+                        c.RFC,
+                        c.COMPANIA,
+                        c.NOTA,
+                        c.TRIMESTRE
+                    FROM TA_EMPLEADO e
+                    INNER JOIN TA_COMPANIA c
+                        ON c.NUM_EMPLEADO = e.NUM_EMPLEADO
+                    WHERE e.NUM_EMPLEADO = v_empleado
+                ),
+                
+                calculos AS (
+                    SELECT
+                        b.*,
+                
+                        /* ISR */
+                        CASE
+                            WHEN b.SUELDO_BRUTO_NUM <= 5000 THEN 0
+                            ELSE ROUND(b.SUELDO_BRUTO_NUM * 0.12,2)
+                        END AS ISR,
+                
+                        /* IMSS */
+                        ROUND(b.SUELDO_BRUTO_NUM * 0.05,2) AS IMSS,
+                
+                        /* Fondo de ahorro */
+                        CASE
+                            WHEN b.SUELDO_BRUTO_NUM >= 8000 THEN
+                                ROUND(b.SUELDO_BRUTO_NUM * 0.03,2)
+                            ELSE
+                                0
+                        END AS FONDO_AHORRO
+                
+                    FROM base b
+                )
+                
+                SELECT
+                    NOMBRE,
+                    APELLIDO,
+                    RFC,
+                    COMPANIA,
+                    NOTA,
+                    TRIMESTRE,
+                
+                    TO_CHAR(SUELDO,'FM999,999,999.00') AS SUELDO,
+                    TO_CHAR(SUELDO_BRUTO_NUM,'FM999,999,999.00') AS SUELDO_BRUTO,
+                
+                    TO_CHAR(ISR,'FM999,999,999.00') AS ISR,
+                    TO_CHAR(IMSS,'FM999,999,999.00') AS IMSS,
+                    TO_CHAR(FONDO_AHORRO,'FM999,999,999.00') AS FONDO_AHORRO,
+                
+                    TO_CHAR(
+                        ISR + IMSS + FONDO_AHORRO,
+                        'FM999,999,999.00'
+                    ) AS TOTAL_DEDUCCIONES,
+                    TO_CHAR(
+                        SUELDO_BRUTO_NUM - (ISR + IMSS + FONDO_AHORRO),
+                        'FM999,999,999.00'
+                    ) AS SUELDO_NET            
+                FROM calculos;
+        END IF;
+    
+        EXCEPTION
+            WHEN NO_DATA_FOUND THEN
+                RAISE_APPLICATION_ERROR(-20002, 'EL EMPLEADO NO EXISTE');
+            WHEN OTHERS THEN
+                RAISE_APPLICATION_ERROR(-20004, '¡ERROR INESPERADO: ' || SQLERRM || '!');
+    END SP_GETEMPLEADO;
 
     PROCEDURE SP_GETDOCUMENTO(
         REC_CURSOR OUT SYS_REFCURSOR,

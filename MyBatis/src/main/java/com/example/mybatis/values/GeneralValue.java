@@ -28,20 +28,6 @@ public class GeneralValue {
             + ")"
             + "}";
 
-    public static final String SP_DEDUCCIONES
-            = "{ call PA_EMPLEADOS.SP_DEDUCCIONES ("
-            + "  #{rec_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=r_SP_DEDUCCIONES},"
-            + "  #{PA_EMPLEADO,    mode=IN, jdbcType=VARCHAR}"
-            + ") "
-            + "}";
-    
-    public static final String SP_IMPUESTOS
-            = "{ call PA_EMPLEADOS.SP_IMPUESTOS ("
-            + "  #{rec_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=r_SP_IMPUESTOS},"
-            + "  #{PA_EMPLEADO,    mode=IN, jdbcType=VARCHAR}"
-            + ") "
-            + "}";
-
     public static final String SP_GETEMPLOYEE
             = "{ call PA_EMPLEADOS.SP_GETEMPLOYEE ("
             + "  #{rec_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=r_SP_GETEMPLOYEE},"
@@ -86,6 +72,13 @@ public class GeneralValue {
             = "{ call PA_DOCUMENTO.SP_GETSTATUS ("
             + "  #{rec_cursor,  mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=r_SP_GETSTATUS}"
             + ")"
+            + "}";
+
+    public static final String SP_GET_EMPLEADO
+            = "{ call PA_DOCUMENTO.SP_GETEMPLEADO ("
+            + "  #{rec_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=r_SP_GET_EMPLEADO},"
+            + "  #{PA_EMPLEADO,    mode=IN, jdbcType=VARCHAR}"
+            + ") "
             + "}";
 
     public static final String SP_GETSTATUS_UNO
@@ -157,6 +150,5 @@ public class GeneralValue {
             = "{ call SP_BORRADO_UNIVERSAL("
             + " #{PA_EMPLEADO,  mode=IN, jdbcType=CLOB}"
             + ")}";
-
 
 }

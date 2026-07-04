@@ -51,37 +51,6 @@ public interface MapeoGeneral {
     @Select(GeneralValue.SP_UPDATE_EMPLEADO)
     @Options(statementType = StatementType.CALLABLE)
     public void SP_UPDATE_EMPLEADO(Map<String, Object> params);
-    
-    @Results(
-            id = "r_SP_DEDUCCIONES",
-            value = {
-                @Result(property = "nombre", column = "NOMBRE", id = true),
-                @Result(property = "bruto", column = "SUELDO_BRUTO"),
-                @Result(property = "ISR", column = "ISR"),
-                @Result(property = "IMSS", column = "IMSS"),
-                @Result(property = "fondo", column = "FONDO_AHORRO"),
-                @Result(property = "neto", column = "SUELDO_NETO")
-            }
-    )
-    @Select(GeneralValue.SP_DEDUCCIONES)
-    @Options(statementType = StatementType.CALLABLE)
-    @ResultType(DeduccionesDTO.class)
-    public void SP_DEDUCCIONES(Map<String, Object> params);
-    
-    @Results(
-            id = "r_SP_IMPUESTOS",
-            value = {
-                @Result(property = "nombre", column = "NOMBRE", id = true),                
-                @Result(property = "ISR", column = "ISR"),
-                @Result(property = "IMSS", column = "IMSS"),
-                @Result(property = "impuesto", column = "TOTAL_IMPUESTOS")
-            }
-    )
-    @Select(GeneralValue.SP_IMPUESTOS)
-    @Options(statementType = StatementType.CALLABLE)
-    @ResultType(ImpuestosDTO.class)
-    public void SP_IMPUESTOS(Map<String, Object> params);
-    
     //COMPAÑIA
     
     @Results(
@@ -261,5 +230,28 @@ public interface MapeoGeneral {
     @Select(GeneralValue.SP_BORRADO_UNIVERSAL)
     @Options(statementType = StatementType.CALLABLE)
     public void SP_BORRADO_UNIVERSAL(Map<String, Object> params);
+
+    @Results(
+            id = "r_SP_GET_EMPLEADO",
+            value = {
+                    @Result(property = "empleado.nombre", column = "NOMBRE"),
+                    @Result(property = "empleado.apellido", column = "APELLIDO"),
+                    @Result(property = "empleado.rfc", column = "RFC"),
+                    @Result(property = "empleado.compania", column = "COMPANIA"),
+                    @Result(property = "empleado.nota", column = "NOTA"),
+                    @Result(property = "empleado.trimestre", column = "TRIMESTRE"),
+                    @Result(property = "percepcion.sueldo", column = "SUELDO"),
+                    @Result(property = "percepcion.sueldoBruto", column = "SUELDO_BRUTO"),
+                    @Result(property = "deduccion.isr", column = "ISR"),
+                    @Result(property = "deduccion.imss", column = "IMSS"),
+                    @Result(property = "deduccion.fondoAhorro", column = "FONDO_AHORRO"),
+                    @Result(property = "deduccion.totalDeducciones", column = "TOTAL_DEDUCCIONES"),
+                    @Result(property = "sueldoNeto", column = "SUELDO_NET")
+            }
+    )
+    @Select(GeneralValue.SP_GET_EMPLEADO)
+    @Options(statementType = StatementType.CALLABLE)
+    @ResultType(SueldoNetoDTO.class)
+    public void SP_GET_EMPLEADO(Map<String, Object> params);
 
 }

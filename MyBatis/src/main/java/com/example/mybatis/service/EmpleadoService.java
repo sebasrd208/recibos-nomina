@@ -2,6 +2,7 @@ package com.example.mybatis.service;
 
 import java.util.*;
 import javax.crypto.*;
+import com.example.mybatis.dto.SueldoNetoDTO;
 import org.springframework.dao.*;
 import com.example.mybatis.dto.*;
 import com.example.mybatis.mappers.*;
@@ -17,56 +18,30 @@ public class EmpleadoService {
     @Autowired
     SecretKey secretKey;
 
-    public SueldoNetoDTO obtenerSueldoNetoEncriptado(String numEmpleado) {
+    public SueldoNetoDTO obtenerSueldo(String numEmpleado) {
         Map<String, Object> params = new HashMap<>();
-
         params.put("PA_EMPLEADO", numEmpleado);
-        mapeo.SP_GETNUMEMPLEADO(params);
-        List<CompaniaDTO> compania = (List<CompaniaDTO>) params.get("rec_cursor");
 
-        for (CompaniaDTO c : compania) {
-            c.encryptFields(secretKey);
-        }
+        mapeo.SP_GET_EMPLEADO(params);
 
-        params.clear();
-        params.put("PA_EMPLEADO", numEmpleado);
-        mapeo.SP_DEDUCCIONES(params);
-        List<DeduccionesDTO> deducciones = (List<DeduccionesDTO>) params.get("rec_cursor");
+        List<SueldoNetoDTO> empleados = (List<SueldoNetoDTO>) params.get("rec_cursor");
 
-        for (DeduccionesDTO c : deducciones) {
-            c.encryptFields(secretKey);
-        }
-
-        params.clear();
-        params.put("PA_EMPLEADO", numEmpleado);
-        mapeo.SP_IMPUESTOS(params);
-        List<ImpuestosDTO> impuestos = (List<ImpuestosDTO>) params.get("rec_cursor");
-
-        for (ImpuestosDTO c : impuestos) {
-            c.encryptFields(secretKey);
-        }
-
-        return new SueldoNetoDTO(numEmpleado, compania, deducciones, impuestos);
+        return empleados.get(0);
     }
 
-    public SueldoNetoDTO obtenerSueldoNeto(String numEmpleado) {
+    public SueldoNetoDTO obtenerSueldoCifrado(String numEmpleado) {
         Map<String, Object> params = new HashMap<>();
-
         params.put("PA_EMPLEADO", numEmpleado);
-        mapeo.SP_GETNUMEMPLEADO(params);
-        List<CompaniaDTO> compania = (List<CompaniaDTO>) params.get("rec_cursor");
 
-        params.clear();
-        params.put("PA_EMPLEADO", numEmpleado);
-        mapeo.SP_DEDUCCIONES(params);
-        List<DeduccionesDTO> deducciones = (List<DeduccionesDTO>) params.get("rec_cursor");
-        
-        params.clear();
-        params.put("PA_EMPLEADO", numEmpleado);
-        mapeo.SP_IMPUESTOS(params);
-        List<ImpuestosDTO> impuestos = (List<ImpuestosDTO>) params.get("rec_cursor");
+        mapeo.SP_GET_EMPLEADO(params);
 
-        return new SueldoNetoDTO(numEmpleado, compania, deducciones, impuestos);
+        List<SueldoNetoDTO> empleados = (List<SueldoNetoDTO>) params.get("rec_cursor");
+
+        for (SueldoNetoDTO s : empleados) {
+            s.encryptFields(secretKey);
+        }
+
+        return empleados.get(0);
     }
 
     public List<EmpleadoDTO> obtenerEmpleados() {

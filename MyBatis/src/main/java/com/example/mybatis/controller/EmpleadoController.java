@@ -33,22 +33,11 @@ public class EmpleadoController {
         }
     }
 
-    @GetMapping("/neto")
-    @Operation(summary = "Mostrar sueldo neto encriptado", description = "Muestra un sueldo neto de un empleado especifico encriptando datos sencibles")
-    public ResponseEntity<?> mostrarNeto(@RequestParam String numEmpleado) {
-        try {
-            SueldoNetoDTO usuario = servicio.obtenerSueldoNetoEncriptado(numEmpleado);
-            return ResponseEntity.ok(usuario);
-        }catch(Exception s){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(s.getCause().getMessage().lines().findFirst().orElse("").trim());
-        }
-    }
-
-    @GetMapping("/neto-empleado")
+    @GetMapping("/sueldo")
     @Operation(summary = "Mostrar sueldo neto", description = "Muestra un sueldo neto de un empleado especifico")
-    public ResponseEntity<?> mostrarNetoEmpleado(@RequestParam String numEmpleado) {
+    public ResponseEntity<?> mostrarSueldo(@RequestParam String numEmpleado) {
         try {
-            SueldoNetoDTO usuario = servicio.obtenerSueldoNeto(numEmpleado);
+            SueldoNetoDTO usuario = servicio.obtenerSueldoCifrado(numEmpleado);
             return ResponseEntity.ok(usuario);
         }catch(Exception s){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(s.getCause().getMessage().lines().findFirst().orElse("").trim());
@@ -92,7 +81,7 @@ public class EmpleadoController {
     @Operation(summary = "Mostrar sueldo neto", description = "Muestra un sueldo neto de un empleado especifico")
     public ResponseEntity<?> generarPdf(@RequestParam String numEmpleado, HttpServletResponse response) {
         try {
-            byte[] pdfBytes = servicioE.generatePdfSueldo(numEmpleado);
+            byte[] pdfBytes = servicioE.generatePdfSueldoNeto(numEmpleado);
 
             if (pdfBytes == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
