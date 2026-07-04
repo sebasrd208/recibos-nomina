@@ -1,5 +1,5 @@
 CREATE OR REPLACE PACKAGE BODY PA_DOCUMENTO AS
-    PROCEDURE SP_GET_STATUS_EMPLEADO(
+        PROCEDURE SP_GET_STATUS_EMPLEADO(
         REC_CURSOR OUT SYS_REFCURSOR,
         PA_EMPLEADO    IN VARCHAR2
     )AS
@@ -75,17 +75,14 @@ CREATE OR REPLACE PACKAGE BODY PA_DOCUMENTO AS
                 calculos AS (
                     SELECT
                         b.*,
-                
-                        /* ISR */
+                        
                         CASE
                             WHEN b.SUELDO_BRUTO_NUM <= 5000 THEN 0
                             ELSE ROUND(b.SUELDO_BRUTO_NUM * 0.12,2)
                         END AS ISR,
-                
-                        /* IMSS */
-                        ROUND(b.SUELDO_BRUTO_NUM * 0.05,2) AS IMSS,
-                
-                        /* Fondo de ahorro */
+                        
+                        ROUND(b.SUELDO_BRUTO_NUM * 0.05,2) AS IMSS,             
+                     
                         CASE
                             WHEN b.SUELDO_BRUTO_NUM >= 8000 THEN
                                 ROUND(b.SUELDO_BRUTO_NUM * 0.03,2)
