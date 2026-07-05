@@ -2,7 +2,7 @@ package com.example.mybatis.values;
 
 public class GeneralValue {
 
-    //EMPLEADO
+    //------------------------------------------EMPLEADO---------------------------------------------------
     
     public static final String SP_GETEMPLEADO
             = "{ call PA_EMPLEADOS.SP_GETEMPLEADO ("
@@ -35,7 +35,7 @@ public class GeneralValue {
             + ") "
             + "}";
     
-    //COMPAÑIA
+    //----------------------------------------------COMPAÑIA----------------------------------------------------
     
     public static final String SP_GETCOMPANIA
             = "{ call PA_COMPANIA.SP_GETCOMPANIA ("
@@ -61,7 +61,7 @@ public class GeneralValue {
             + ")"
             + "}";
     
-    //DOCUMENTOS
+    //-----------------------------------------DOCUMENTOS----------------------------------------------------------------
     public static final String SP_GETDOCUMENTOS
             = "{ call PA_DOCUMENTO.SP_GETDOCUMENTOS ("
             + "  #{rec_cursor,  mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=r_SP_GETDOCUMENTOS}"
