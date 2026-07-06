@@ -45,11 +45,13 @@
                             <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='seccion' && sortDirection==='asc', 'bi-caret-down-fill':
                              sortColumn==='seccion' && sortDirection==='desc'}"></i>
                         </th>
-                        <th (click)="ordenarEmpleados('sueldo')">
-                            SALARIO
-                            <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='sueldo' && sortDirection==='asc', 'bi-caret-down-fill':
-                             sortColumn==='sueldo' && sortDirection==='desc'}"></i>
-                        </th>
+                        @if (isAdmin()) {
+                            <th (click)="ordenarEmpleados('sueldo')">
+                                SALARIO
+                                <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='sueldo' && sortDirection==='asc', 'bi-caret-down-fill':
+                                sortColumn==='sueldo' && sortDirection==='desc'}"></i>
+                            </th>
+                        }
                         <th>ACCIONES</th>
                     </tr>
                 </thead>
@@ -59,14 +61,16 @@
                         <td> {{empleado.idEmpleado}} </td>
                         <td> {{empleado.nombre}} </td>
                         <td> {{empleado.apellido}} </td>
-                        <td> {{empleado.numEmpleado}} </td>
+                        <td> {{empleado.numEmpleado}} </td>                    
                         <td> {{empleado.seccion}} </td>
-                        <td> {{empleado.sueldo | currency: 'MXN':'symbol':'1.2-2' }} </td>
+                        @if (isAdmin()) {
+                            <td> {{empleado.sueldo | currency: 'MXN':'symbol':'1.2-2' }} </td>
+                        }
                         <td>
                             <button class="btn btn-danger btn-sm" (click)="eliminar(empleado.numEmpleado)" [title]="'Eliminar a '+empleado.nombre">
                                 <i class="bi bi-trash"></i>
                             </button>
-                            <button class="btn btn-lg btn-warning btn-sm" (click)="obtenerPDF(empleado.numEmpleado)" [title]="'Eliminar a '+empleado.nombre">
+                            <button class="btn btn-lg btn-success btn-sm" (click)="obtenerPDF(empleado.numEmpleado)" [title]="'Ver recibo de '+empleado.nombre">
                                 <i class="bi bi-file-earmark-pdf"></i>
                             </button>
                             <button class="btn btn-lg btn-warning btn-sm" (click)="editar(empleado)" [title]="'Actualizar información de '+empleado.nombre">

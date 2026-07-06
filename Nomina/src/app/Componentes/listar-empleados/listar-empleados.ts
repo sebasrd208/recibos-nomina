@@ -5,6 +5,7 @@ import { Servidor } from '../../Servidor/servidor';
 import { Router } from '@angular/router';
 import { Empleado } from '../../Entidades/Empleado';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../Servidor/auth.service';
 
 @Component({
   selector: 'app-listar-empleados',
@@ -18,7 +19,7 @@ export class ListarEmpleados implements OnInit {
     this.listar();
   }
 
-  constructor(private router: Router, private servidor: Servidor) {}
+  constructor(private router: Router, private servidor: Servidor, private auth: AuthService) {}
 
   empleados: Empleado[] = [];
   sortColumn: keyof Empleado = 'idEmpleado';
@@ -89,6 +90,10 @@ export class ListarEmpleados implements OnInit {
         });
       }
     })
+  }
+
+  isAdmin() {
+    return this.auth.isAdmin();
   }
 
   obtenerPDF(numEmpleado: string) {
