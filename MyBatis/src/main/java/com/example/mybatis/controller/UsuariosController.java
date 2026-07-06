@@ -33,10 +33,26 @@ public class UsuariosController {
     @Operation(summary = "Mostrar usuario", description = "Muestra los datos del usuario")
     public ResponseEntity<?> mostrarNetoEmpleado(@RequestParam String usuario) {
         try {
-            List<UsuariosDTO> username = service.obtenerUsuario(usuario);
+            UsuariosDTO username = service.obtenerUsuario(usuario);
             return ResponseEntity.ok(username);
         }catch(Exception s){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(s.getCause().getMessage().lines().findFirst().orElse("").trim());
+        }
+    }
+
+    @PostMapping("/login")
+    @Operation(summary = "Autenticación de usuarios", description = "Autentica los usuario y verifica los roles de tal usuario")
+    public ResponseEntity<?> login(@RequestBody LoginDTO credencial) {
+        try {
+            UsuariosDTO username = service.login(credencial.getUsuario(), credencial.getPassword());
+
+            if (username == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body("Usuario o contraseña incorrectos");
+            }
+            return ResponseEntity.ok(username);
+        }catch(Exception s){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(s.getCause().getMessage().lines().findFirst().orElse("").trim());
         }
     }
 }

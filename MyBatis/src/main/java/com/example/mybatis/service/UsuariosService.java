@@ -18,14 +18,29 @@ public class UsuariosService implements UserDetailsService {
     @Autowired
     PasswordEncoder encoder;
 
-    public List<UsuariosDTO> obtenerUsuario(String usuario) {
+    public UsuariosDTO obtenerUsuario(String usuario) {
         Map<String, Object> params = new HashMap<>();
         params.put("PA_USER", usuario);
         mapeo.SP_GETUSUARIO(params);
 
         List<UsuariosDTO> usuarios = (List<UsuariosDTO>) params.get("rec_cursor");
 
-        return usuarios;
+        return usuarios.get(0);
+    }
+
+    public UsuariosDTO login(String usuario, String password) {
+
+        UsuariosDTO user = obtenerUsuario(usuario);
+
+        if (user == null) {
+            return null;
+        }
+
+        if (!encoder.matches(password, user.getPassword())) {
+            return null;
+        }
+
+        return user;
     }
 
     public void insertarUsuarios(UsuariosDTO dto) {
@@ -43,20 +58,17 @@ public class UsuariosService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        List<UsuariosDTO> usuarios = obtenerUsuario(username);
+        UsuariosDTO usuario = obtenerUsuario(username);
 
-        /*if(usuarios == null || usuarios.isEmpty()) {
+        if(usuario == null) {
             throw new UsernameNotFoundException("Usuario no encontrado");
-        }*/
-
-        for(UsuariosDTO usuario: usuarios){
-            return User.builder()
-                    .username(usuario.getUsuario())
-                    .password(usuario.getPassword())
-                    .roles(String.valueOf(usuario.getRol()))
-                    .build();
         }
 
-        throw new UsernameNotFoundException("Usuario no encontrado");
+        return User.builder()
+                .username(usuario.getUsuario())
+                .password(usuario.getPassword())
+                .roles(String.valueOf(usuario.getRol()))
+                .build();
+
     }
 }

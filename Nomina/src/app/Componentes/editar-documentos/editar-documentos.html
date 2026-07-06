@@ -4,23 +4,23 @@
 
         <form (ngSubmit)="editar()">
             <div class="mb-3">
-                <label class="form-label">NOMBRE: </label>
-                <input type="text" class="form-control" [(ngModel)]="document.idDocumento" name="idDocumento" readonly>
+                <label class="form-label">ID: </label>
+                <input type="text" class="form-control" [(ngModel)]="document.idDocumento" name="idDocumento" disabled>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">NOMBRE: </label>
-                <input type="text" class="form-control" [(ngModel)]="document.nombre" name="nombre" readonly>
+                <input type="text" class="form-control" [(ngModel)]="document.nombre" name="nombre" disabled>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">APELLIDO: </label>
-                <input type="text" class="form-control" [(ngModel)]="document.apellido" name="apellido" readonly>
+                <input type="text" class="form-control" [(ngModel)]="document.apellido" name="apellido" disabled>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">NUMERO DE EMPLEADO: </label>
-                <input type="number" class="form-control" [(ngModel)]="document.numEmpleado" name="numEmpleado" readonly>
+                <input type="number" class="form-control" [(ngModel)]="document.numEmpleado" name="numEmpleado" disabled>
             </div>
 
             <div class="mb-3">

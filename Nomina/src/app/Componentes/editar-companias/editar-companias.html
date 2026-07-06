@@ -5,17 +5,17 @@
         <form (ngSubmit)="editar()">
             <div class="mb-3">
                 <label class="form-label">NOMBRE: </label>
-                <input type="text" class="form-control" [(ngModel)]="company.nombre" name="nombre" readonly>
+                <input type="text" class="form-control" [(ngModel)]="company.nombre" name="nombre" disabled>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">APELLIDO: </label>
-                <input type="text" class="form-control" [(ngModel)]="company.apellido" name="apellido" readonly>
+                <input type="text" class="form-control" [(ngModel)]="company.apellido" name="apellido" disabled>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">NUMERO DE EMPLEADO: </label>
-                <input type="number" class="form-control" [(ngModel)]="company.numEmpleado" name="numEmpleado" readonly>
+                <input type="number" class="form-control" [(ngModel)]="company.numEmpleado" name="numEmpleado" disabled>
             </div>
 
             <div class="mb-3">

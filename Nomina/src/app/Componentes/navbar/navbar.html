@@ -120,6 +120,7 @@
                                 {{ username }}
                             </span>
                             <span class="text-muted" style="font-size: 0.75rem;">
+                                {{ rol }}
                             </span>
                         </div>
                     </a>
@@ -130,12 +131,14 @@
                                 Cerrar sesión
                             </button>
                         </li>
-                        <li>
-                            <button class="dropdown-item d-flex align-items-center gap-2 text-danger" (click)="registro()">
-                                <i class="bi bi-plus-square"></i>
-                                Crear usuario
-                            </button>
-                        </li>
+                        @if (isAdmin()) {
+                            <li>
+                                <button class="dropdown-item d-flex align-items-center gap-2 text-danger" (click)="registro()">
+                                    <i class="bi bi-plus-square"></i>
+                                    Crear usuario
+                                </button>
+                            </li>
+                        }                  
                         <li>
                             <button class="dropdown-item d-flex align-items-center gap-2 text-danger" (click)="nuevo()">
                                 <i class="bi bi-person-plus text-success fs-5"></i>
