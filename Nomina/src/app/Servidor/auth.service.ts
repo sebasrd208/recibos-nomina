@@ -24,6 +24,14 @@ export class AuthService {
 
   private url = 'http://localhost:8090/usuarios';
 
+  listarUsuarios() {
+    return this.http.get<Usuarios[]>(this.url);
+  }
+
+  buscarUsuarios(username: string) {
+    return this.http.get<Usuarios>(this.url + '/username?usuario=' + username);
+  }
+
   login(usuario: string, password: string): Observable<Usuarios> {
     return this.http.post<Usuarios>(this.url + '/login', {
       usuario,
@@ -47,6 +55,10 @@ export class AuthService {
 
   registrar(usuario: Usuarios): Observable<any> {
     return this.http.post(this.url + '/guardar', usuario);
+  }
+
+  editar(usuario: Usuarios): Observable<any> {
+    return this.http.put(this.url + '/editar', usuario);
   }
 
   logout() {
@@ -77,5 +89,9 @@ export class AuthService {
 
   isAdmin(): boolean {
     return this.getUser()?.rol === 'ADMIN';
+  }
+
+  eliminar(username: string) {
+    return this.http.delete(this.url + '/eliminar?username=' + username);
   }
 }

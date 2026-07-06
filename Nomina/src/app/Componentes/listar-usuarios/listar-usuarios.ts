@@ -1,34 +1,36 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Servidor } from '../../Servidor/servidor';
 import { Router } from '@angular/router';
-import { Compania } from '../../Entidades/Empleado';
+import { AuthService } from '../../Servidor/auth.service';
+import { Usuarios } from '../../Entidades/Usuarios';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-listar-companias',
+  selector: 'app-listar-usuarios',
   imports: [FormsModule, CommonModule],
-  templateUrl: './listar-companias.html',
-  styleUrl: './listar-companias.css',
+  templateUrl: './listar-usuarios.html',
+  styleUrl: './listar-usuarios.css',
 })
-export class ListarCompanias implements OnInit {
+export class ListarUsuarios implements OnInit {
 
   ngOnInit(): void {
     this.listar();
   }
 
-  constructor(private router: Router, private servidor: Servidor){}
+  constructor(private router: Router, private auth: AuthService) { }
 
-  companias: Compania[] = [];
-  sortColumn: keyof Compania = 'idCompania';
+  usuarios: Usuarios[] = [];
+  filtroRoles: string = '';
+  roles: string[] = [];
+  sortColumn: keyof Usuarios = 'idUsuario';
   sortDirection: 'asc' | 'desc' = 'asc';
 
   listar() {
-    this.servidor.listarCompanias().subscribe({
+    this.auth.listarUsuarios().subscribe({
       next: (data) => {
-        this.companias = data;
-        console.log(JSON.stringify(data));
+        this.usuarios = data;
+        this.roles = [...new Set(data.map(e => e.rol))];
       },
       error: () => {
         Swal.fire('Error', 'No se pudieron cargar los pedidos', 'error');
@@ -36,7 +38,7 @@ export class ListarCompanias implements OnInit {
     });
   }
 
-  ordenarCompanias(columna: keyof Compania) {
+  ordenarUsuarios(columna: keyof Usuarios) {
     if (this.sortColumn === columna) {
       this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
     } else {
@@ -44,7 +46,7 @@ export class ListarCompanias implements OnInit {
       this.sortDirection = 'asc';
     }
 
-    this.companias.sort((a, b) => {
+    this.usuarios.sort((a, b) => {
       const valA = a[columna];
       const valB = b[columna];
 
@@ -60,7 +62,7 @@ export class ListarCompanias implements OnInit {
     });
   }
 
-  eliminar(numEmpleado: string) {
+  eliminar(username: string) {
     Swal.fire({
       title: '¿Eliminar dato?',
       text: 'Esta accion no se puede deshacer',
@@ -70,7 +72,7 @@ export class ListarCompanias implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.servidor.eliminar(numEmpleado).subscribe({
+        this.auth.eliminar(username).subscribe({
           next: () => {
             Swal.fire('Eliminado', 'Dato eliminado correctamente', 'success');
             this.listar();
@@ -87,8 +89,28 @@ export class ListarCompanias implements OnInit {
     })
   }
 
-  editar(compania_x: Compania) {
-    localStorage.setItem('compania_key', compania_x.numEmpleado);
-    this.router.navigate(['editar-companias']);
+  editar(usuario_x: Usuarios) {
+    localStorage.setItem('usuario_key', usuario_x.usuario);
+    this.router.navigate(['editar-usuarios']);
+  }
+
+  usuariosFiltrados(): Usuarios[] {
+    if (!this.filtroRoles) {
+      return this.usuarios;
+    }
+
+    return this.usuarios.filter(emp => emp.rol === this.filtroRoles);
+  }
+
+  get totalFiltradosEmpleados(): number {
+    return this.usuariosFiltrados().length;
+  }
+
+  get textoFiltroEmpleados(): string {
+    if (!this.filtroRoles) {
+      return 'TOTAL: '+this.totalFiltradosEmpleados;
+    }
+
+    return this.filtroRoles+": "+this.totalFiltradosEmpleados;
   }
 }

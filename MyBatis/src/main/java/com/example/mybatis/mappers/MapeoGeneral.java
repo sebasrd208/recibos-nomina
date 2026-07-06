@@ -219,9 +219,31 @@ public interface MapeoGeneral {
     @ResultType(UsuariosDTO.class)
     public void SP_GETUSUARIO(Map<String, Object> params);
 
+    @Results(
+            id = "r_SP_GETUSUARIOS",
+            value = {
+                    @Result(property = "idUsuario", column = "ID_USUARIO", id = true),
+                    @Result(property = "usuario",      column = "USUARIO"),
+                    @Result(property = "password",      column = "CONTRASENA"),
+                    @Result(property = "rol",      column = "ROL")
+            }
+    )
+    @Select(GeneralValue.SP_GETUSUARIOS)
+    @Options(statementType = StatementType.CALLABLE)
+    @ResultType(UsuariosDTO.class)
+    public void SP_GETUSUARIOS(Map<String, Object> params);
+
     @Select(GeneralValue.SP_SETUSUARIO)
     @Options(statementType = StatementType.CALLABLE)
     public void SP_SETUSUARIO(Map<String, Object> params);
+
+    @Select(GeneralValue.SP_UPTUSUARIO)
+    @Options(statementType = StatementType.CALLABLE)
+    public void SP_UPTUSUARIO(Map<String, Object> params);
+
+    @Select(GeneralValue.SP_DELUSUARIO)
+    @Options(statementType = StatementType.CALLABLE)
+    public void SP_DELUSUARIO(Map<String, Object> params);
 
     @Select(GeneralValue.SP_UNIVERSAL)
     @Options(statementType = StatementType.CALLABLE)

@@ -9,6 +9,8 @@ import { EditarCompanias } from './Componentes/editar-companias/editar-companias
 import { EditarEmpleados } from './Componentes/editar-empleados/editar-empleados';
 import { Guardar } from './Componentes/guardar/guardar';
 import { EditarDocumentos } from './Componentes/editar-documentos/editar-documentos';
+import { ListarUsuarios } from './Componentes/listar-usuarios/listar-usuarios';
+import { EditarUsuarios } from './Componentes/editar-usuarios/editar-usuarios';
 
 export const routes: Routes = [
 
@@ -36,6 +38,11 @@ export const routes: Routes = [
         canActivate: [guardGuard]
     },
     {
+        path: 'listar-usuarios',
+        component: ListarUsuarios,
+        canActivate: [guardGuard]
+    },
+    {
         path: 'editar-companias',
         component: EditarCompanias,
         canActivate: [guardGuard]
@@ -48,6 +55,12 @@ export const routes: Routes = [
     {
         path: 'editar-documentos',
         component: EditarDocumentos,
+        canActivate: [guardGuard]
+    },
+    
+    {
+        path: 'editar-usuarios',
+        component: EditarUsuarios,
         canActivate: [guardGuard]
     },
     {

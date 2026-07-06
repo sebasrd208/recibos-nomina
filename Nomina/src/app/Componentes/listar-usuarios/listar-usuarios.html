@@ -1,0 +1,63 @@
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4" style="user-select: none;">
+        <h3>USUARIOS</h3>
+        <div class="d-flex justify-content-end align-items-center gap-3">                      
+            <select class="form-select w-auto" [(ngModel)]="filtroRoles">
+                <option value="">TODOS</option>
+                @for (rol of roles; track rol) {
+                <option [value]="rol">
+                    {{ rol }}
+                </option>
+                }
+            </select>
+            <h3 class="text-muted m-0">
+                {{ textoFiltroEmpleados }}
+            </h3>  
+        </div>
+    </div>
+    <div class="card shadow">
+        <div class="card-body" style="user-select: none;">
+            <table class="table table-hover align-middle text-center">
+                <thead class="table-dark">
+                    <tr>                     
+                        <th (click)="ordenarUsuarios('idUsuario')">
+                            #
+                            <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='idUsuario' && sortDirection==='asc', 'bi-caret-down-fill':
+                             sortColumn==='idUsuario' && sortDirection==='desc'}"></i>
+                        </th>
+                        <th (click)="ordenarUsuarios('usuario')">
+                            usuarios
+                            <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='usuario' && sortDirection==='asc', 'bi-caret-down-fill':
+                             sortColumn==='usuario' && sortDirection==='desc'}"></i>
+                        </th>
+                        <th (click)="ordenarUsuarios('rol')">
+                            ROL
+                            <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='rol' && sortDirection==='asc', 'bi-caret-down-fill':
+                             sortColumn==='rol' && sortDirection==='desc'}"></i>
+                        </th>
+                        <th>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (usuario of usuariosFiltrados(); track $index) {
+                    <tr>                        
+                        <td> {{usuario.idUsuario}} </td>                        
+                        <td> {{usuario.usuario}} </td>
+                        <td> {{usuario.rol}} </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" (click)="eliminar(usuario.usuario)">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                            <button class="btn btn-lg btn-warning btn-sm" (click)="editar(usuario)">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    }@empty{
+                    <td class="text-center" colspan="5"> No hay usuarios registrados</td>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

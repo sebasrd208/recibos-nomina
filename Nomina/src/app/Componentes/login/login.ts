@@ -59,30 +59,7 @@ export class Login {
         this.authService.logout();
       }
     });
-  }
-  /*login() {
-      if (!this.username || !this.password) {
-        Swal.fire('Error', 'Completa todos los campos', 'error');
-        return;
-      }
-  
-      this.authService.login(this.username, this.password);
-  
-      this.service.listarCompanias().subscribe({
-        next: () => {
-          Swal.fire('ACCESO CONCEDIDO', 'Bienvenido ' + this.username, 'success');
-          this.router.navigate(['listar-companias']);
-        },
-        error: (err) => {
-          if (err.status === 403) {
-            Swal.fire('ACCESO DENEGADO', 'Datos de acceso incorrectos', 'error');
-          } else {
-            Swal.fire('Error', 'Error del servidor', 'error');
-          }
-          this.authService.logout();
-        }
-      });
-    }*/
+  }  
 
   registro() {
     this.router.navigate(['registros']);

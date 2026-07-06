@@ -28,6 +28,15 @@ public class UsuariosService implements UserDetailsService {
         return usuarios.get(0);
     }
 
+    public List<UsuariosDTO> obtenerUsuarios() {
+        Map<String, Object> params = new HashMap<>();
+        mapeo.SP_GETUSUARIOS(params);
+
+        List<UsuariosDTO> usuarios = (List<UsuariosDTO>) params.get("rec_cursor");
+
+        return usuarios;
+    }
+
     public UsuariosDTO login(String usuario, String password) {
 
         UsuariosDTO user = obtenerUsuario(usuario);
@@ -56,6 +65,20 @@ public class UsuariosService implements UserDetailsService {
         }
     }
 
+    public void actualizarUsuarios(UsuariosDTO dto) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("PA_ID", dto.getIdUsuario());
+        params.put("PA_USER", dto.getUsuario());
+        params.put("PA_PASSWORD", encoder.encode(dto.getPassword()));
+        params.put("PA_ROL", String.valueOf(dto.getRol()));
+
+        try {
+            mapeo.SP_UPTUSUARIO(params);
+        } catch (DataAccessException s) {
+            throw new RuntimeException(s.getMostSpecificCause().getMessage());
+        }
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UsuariosDTO usuario = obtenerUsuario(username);
@@ -70,5 +93,16 @@ public class UsuariosService implements UserDetailsService {
                 .roles(String.valueOf(usuario.getRol()))
                 .build();
 
+    }
+
+    public void borrarUsuario(String username){
+        Map<String, Object> params = new HashMap<>();
+        params.put("PA_USER", username);
+
+        try {
+            mapeo.SP_DELUSUARIO(params);
+        } catch (DataAccessException s) {
+            throw new RuntimeException(s.getMostSpecificCause().getMessage());
+        }
     }
 }

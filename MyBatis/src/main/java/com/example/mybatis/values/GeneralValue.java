@@ -127,8 +127,12 @@ public class GeneralValue {
             = "{ call PA_USUARIOS.SP_GETUSUARIO ("
             + "  #{rec_cursor,  mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=r_SP_GETUSUARIO},"
             + "  #{PA_USER,     mode=IN, jdbcType=VARCHAR}"
-            + ")"
-            + "}";
+            + ")}";
+
+    public static final String SP_GETUSUARIOS
+            = "{ call PA_USUARIOS.SP_GETUSUARIOS ("
+            + "  #{rec_cursor,  mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=r_SP_GETUSUARIOS}"
+            + ")}";
 
     public static final String SP_SETUSUARIO
             = "{ call PA_USUARIOS.SP_SETUSUARIO ("
@@ -137,6 +141,19 @@ public class GeneralValue {
             + "  #{PA_ROL,      mode=IN, jdbcType=VARCHAR}"
             + ")"
             + "}";
+
+    public static final String SP_UPTUSUARIO
+            = "{ call PA_USUARIOS.SP_UPTUSUARIO ("
+            + "  #{PA_ID,       mode=IN, jdbcType=VARCHAR},"
+            + "  #{PA_USER,     mode=IN, jdbcType=VARCHAR},"
+            + "  #{PA_PASSWORD, mode=IN, jdbcType=VARCHAR},"
+            + "  #{PA_ROL,      mode=IN, jdbcType=VARCHAR}"
+            + ")}";
+
+    public static final String SP_DELUSUARIO
+            = "{ call PA_USUARIOS.SP_DELUSUARIO("
+            + " #{PA_USER,  mode=IN, jdbcType=VARCHAR}"
+            + ")}";
 
     public static final String SP_UNIVERSAL
             = "{ call SP_UNIVERSAL ("

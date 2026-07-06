@@ -29,12 +29,34 @@ public class UsuariosController {
         }
     }
 
+    @PutMapping("/editar")
+    @Operation(summary = "Actualizar usuario", description = "Actualiza los datos de un usuario existente")
+    public ResponseEntity<?> editar(@RequestBody UsuariosDTO dto) {
+        try {
+            service.actualizarUsuarios(dto);
+            return ResponseEntity.status(HttpStatus.CREATED).body("{\"Mensaje\":\"Actualización exitosa\"}");
+        } catch (RuntimeException s) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(s.getMessage().lines().findFirst().orElse("").trim());
+        }
+    }
+
     @GetMapping("/username")
     @Operation(summary = "Mostrar usuario", description = "Muestra los datos del usuario")
-    public ResponseEntity<?> mostrarNetoEmpleado(@RequestParam String usuario) {
+    public ResponseEntity<?> mostrarUsuario(@RequestParam String usuario) {
         try {
             UsuariosDTO username = service.obtenerUsuario(usuario);
             return ResponseEntity.ok(username);
+        }catch(Exception s){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(s.getCause().getMessage().lines().findFirst().orElse("").trim());
+        }
+    }
+
+    @GetMapping
+    @Operation(summary = "Mostrar usuario", description = "Muestra los datos del usuario")
+    public ResponseEntity<?> mostrarUsuarios() {
+        try {
+            List<UsuariosDTO> usuarios = service.obtenerUsuarios();
+            return ResponseEntity.ok(usuarios);
         }catch(Exception s){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(s.getCause().getMessage().lines().findFirst().orElse("").trim());
         }
@@ -53,6 +75,17 @@ public class UsuariosController {
             return ResponseEntity.ok(username);
         }catch(Exception s){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(s.getCause().getMessage().lines().findFirst().orElse("").trim());
+        }
+    }
+
+    @DeleteMapping("/eliminar")
+    @Operation(summary = "Eliminar usuario", description = "Elimina un usuario existente")
+    public ResponseEntity<?> eliminar(@RequestParam String username) {
+        try {
+            service.borrarUsuario(username);
+            return ResponseEntity.status(HttpStatus.CREATED).body("{\"Mensaje\":\"Usuario eliminado de manera exitosa\"}");
+        } catch (RuntimeException s) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(s.getMessage().lines().findFirst().orElse("").trim());
         }
     }
 }

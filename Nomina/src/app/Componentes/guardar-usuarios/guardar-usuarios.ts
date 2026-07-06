@@ -42,7 +42,11 @@ export class GuardarUsuarios {
     this.auth.registrar(this.usuario).subscribe({
       next: () => {
         Swal.fire('Éxito', 'Usuario registrado correctamente', 'success');
-        this.router.navigate(['login']);
+        if (this.isLoggedIn()) {    
+          this.router.navigate(['listar-usuarios']);
+        }else{
+          this.router.navigate(['login']);
+        }
       },
       error: (error) => {
         console.log(JSON.stringify(error));
@@ -53,7 +57,7 @@ export class GuardarUsuarios {
 
   login() {
     if (this.isLoggedIn()) {
-      this.router.navigate(['listar-proveedores']);
+      this.router.navigate(['listar-usuarios']);
     } else {
       this.router.navigate(['login']);
     }
