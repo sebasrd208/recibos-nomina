@@ -2,7 +2,7 @@
     <div class="mb-2" style="user-select: none;">
         <h3 class="mb-3">DOCUMENTO</h3>
         <div class="d-flex justify-content-end align-items-center gap-3">            
-            <button class="btn btn-success" (click)="enviarPendientes()" [disabled]="!hayPendientes()">
+            <button class="btn btn-success" (click)="enviarPendientes()" [disabled]="!hayPendientes()" title="Enviar correos pendientes">
                 ENVIAR PENDIENTES
             </button>
             <select class="form-select w-auto" [(ngModel)]="filtroEstado">

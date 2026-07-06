@@ -184,11 +184,19 @@ export class ListarDocumentos implements OnInit {
         this.listar();
       },
       error: (err) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Ocurrió un problema al enviar los correos'
-        });
+        if (err.status === 403) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'SIN AUTORIZACIÓN',
+            text: 'Necesitas permisos de ADMINISTRADOR para enviar correos'
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Ocurrió un problema al enviar los correos'
+          });
+        }
 
         console.error(err);
       }
@@ -215,13 +223,13 @@ export class ListarDocumentos implements OnInit {
   get textoFiltroDocumentos(): string {
     switch (this.filtroEstado) {
       case '0':
-        return 'PENDIENTES: '+this.totalFiltradosDocumentos;
+        return 'PENDIENTES: ' + this.totalFiltradosDocumentos;
       case '1':
-        return 'ENVIADOS: '+this.totalFiltradosDocumentos;
+        return 'ENVIADOS: ' + this.totalFiltradosDocumentos;
       case '2':
-        return 'ERRONÉOS: '+this.totalFiltradosDocumentos;
+        return 'ERRONÉOS: ' + this.totalFiltradosDocumentos;
       default:
-        return 'TOTAL: '+this.totalFiltradosDocumentos;
+        return 'TOTAL: ' + this.totalFiltradosDocumentos;
     }
   }
 }
