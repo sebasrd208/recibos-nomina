@@ -51,10 +51,12 @@ export class Login {
 
       error: (err) => {
         if (err.status === 401 || err.status === 403) {
-          Swal.fire('ACCESO DENEGADO', 'Datos de acceso incorrectos', 'error');
+          Swal.fire('ACCESO DENEGADO', 'Datos de acceso incorrectos', 'error');          
         } else {
           Swal.fire('Error', 'Error del servidor', 'error');
         }
+        this.username='';
+        this.password='';
 
         this.authService.logout();
       }

@@ -45,10 +45,10 @@
                         <td> {{usuario.usuario}} </td>
                         <td> {{usuario.rol}} </td>
                         <td>
-                            <button class="btn btn-danger btn-sm" (click)="eliminar(usuario.usuario)">
+                            <button class="btn btn-danger btn-sm" (click)="eliminar(usuario.usuario)" title='Eliminar usuario'>
                                 <i class="bi bi-trash"></i>
                             </button>
-                            <button class="btn btn-lg btn-warning btn-sm" (click)="editar(usuario)">
+                            <button class="btn btn-lg btn-warning btn-sm" (click)="editar(usuario)" title='Actualizar usuario'>
                                 <i class="bi bi-pencil"></i>
                             </button>
                         </td>

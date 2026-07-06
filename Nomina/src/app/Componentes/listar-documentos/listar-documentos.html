@@ -71,14 +71,15 @@
                             }}
                         </td>
                         <td>
-                            <button class="btn btn-danger btn-sm" (click)="eliminar(documento.numEmpleado)">
+                            <button class="btn btn-danger btn-sm" (click)="eliminar(documento.numEmpleado)" title="Eliminar documento">
                                 <i class="bi bi-trash"></i>
                             </button>
                             <button class="btn btn-lg btn-warning btn-sm" (click)="enviar(documento.numEmpleado)"
-                                [disabled]="documento.status === '1'">
+                                [disabled]="documento.status === '1'" [title]="'Enviar recibo a '+documento.nombre">
                                 <i class="bi bi-send"></i>
                             </button>
-                            <button class="btn btn-lg btn-warning btn-sm" (click)="editar(documento)">
+                            <button class="btn btn-lg btn-warning btn-sm" (click)="editar(documento)" 
+                            [title]="'Editar información de '+documento.nombre">
                                 <i class="bi bi-pencil"></i>
                             </button>
                         </td>

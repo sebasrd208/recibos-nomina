@@ -38,10 +38,10 @@
                         <td> {{compania.numEmpleado}} </td>
                         <td> {{compania.rfc}} </td>
                         <td>
-                            <button class="btn btn-danger btn-sm" (click)="eliminar(compania.numEmpleado)">
+                            <button class="btn btn-danger btn-sm" (click)="eliminar(compania.numEmpleado)" [title]="'Eliminar a '+compania.nombre">
                                 <i class="bi bi-trash"></i>
                             </button>
-                            <button class="btn btn-lg btn-warning btn-sm" (click)="editar(compania)">
+                            <button class="btn btn-lg btn-warning btn-sm" (click)="editar(compania)" [title]="'Actualizar información de '+compania.nombre">
                                 <i class="bi bi-pencil"></i>
                             </button>
                         </td>

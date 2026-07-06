@@ -28,11 +28,11 @@
                 <input type="text" class="form-control" [(ngModel)]="document.correo" name="correo">
             </div>
 
-            <button class="btn btn-primary w-100 mb-3">
+            <button class="btn btn-primary w-100 mb-3" title='Actualizar documento'>
                 <i class="bi bi-pencil-square me-2"></i> Actualizar documento
             </button>
 
-            <button class="btn btn-danger w-100 mb-3" (click)="cancelar()">
+            <button class="btn btn-danger w-100 mb-3" (click)="cancelar()" title='Cancelar actualización'>
                 <i class="bi bi-x-circle me-2"></i> Cancelar
             </button>
         </form>
