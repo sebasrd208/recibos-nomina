@@ -196,7 +196,7 @@ public class EnvioService {
             document.add(periodoPdf);
 
             document.add(new Paragraph("\n"));
-            document.add(new Paragraph("Nombre del empleado: " + emp.getNombre() + " " + emp.getApellido(), boldFont));
+            document.add(new Paragraph("Nombre: " + emp.getNombre() + " " + emp.getApellido(), boldFont));
             document.add(new Paragraph("No. de Empleado: " + numEmpleado, smallFont));
             document.add(new Paragraph("RFC: " + emp.getRfc(), smallFont));
             document.add(new Paragraph("Compañía: " + emp.getCompania(), smallFont));

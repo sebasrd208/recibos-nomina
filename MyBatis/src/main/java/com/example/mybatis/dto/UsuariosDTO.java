@@ -1,6 +1,5 @@
 package com.example.mybatis.dto;
 
-import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 @Data
