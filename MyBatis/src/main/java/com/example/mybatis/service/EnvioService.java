@@ -67,7 +67,7 @@ public class EnvioService {
         } catch (Exception e) {
             DocumentoDTO dto = new DocumentoDTO();
             dto.setNumEmpleado(numEmpleado);
-            dto.setDocumento(null);
+            dto.setDocumento("No se pudo enviar el documento");
             dto.setStatus("2");
             servicio.actualizarDocumenctos(dto);
         }
