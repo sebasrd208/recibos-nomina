@@ -19,14 +19,15 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errores);
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<?> handlerRuntime(RuntimeException s){
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("", s.getMessage().lines().findFirst().orElse("").trim()));
+    @ExceptionHandler(RegistroException.class)
+    public ResponseEntity<?> handlerRegistro(RegistroException s){
+        String mensaje = s.getMessage().lines().findFirst().orElse("").trim();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("mensaje", mensaje));
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<?> handlerRuntimeTwo(RuntimeException s){
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("", s.getCause().getMessage().lines().findFirst().orElse("").trim()));
+    @ExceptionHandler(ConsultaException.class)
+    public ResponseEntity<?> handlerConsulta(ConsultaException s){
+        String mensaje = s.getCause().getMessage().lines().findFirst().orElse("").trim();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("mensaje", mensaje));
     }
 }
