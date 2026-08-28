@@ -1,8 +1,8 @@
 package com.example.mybatis.config;
 
 import java.util.*;
-import org.springframework.web.cors.*;
 import org.springframework.http.*;
+import org.springframework.web.cors.*;
 import org.springframework.security.web.*;
 import org.springframework.security.config.*;
 import org.springframework.context.annotation.*;
@@ -32,7 +32,6 @@ public class SecurityConfig {
             auth.requestMatchers(HttpMethod.GET, "/companias/**", "/documentos/**", "/empleados/**", "/universal/**")
                     .hasAnyRole("USER", "ADMIN");
             auth.requestMatchers("/companias/**", "/documentos/**", "/empleados/**", "/envios-num/**", "/universal/**").hasRole("ADMIN");
-            //auth.anyRequest().permitAll();
             auth.anyRequest().authenticated();
         });
 
