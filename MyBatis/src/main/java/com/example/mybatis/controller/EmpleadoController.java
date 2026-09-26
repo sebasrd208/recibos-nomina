@@ -79,7 +79,7 @@ public class EmpleadoController {
 
     @GetMapping("/neto/pdf/{numEmpleado}")
     @Operation(summary = "Mostrar sueldo neto", description = "Muestra un sueldo neto de un empleado especifico")
-    public ResponseEntity<?> generarPdf(@RequestParam String numEmpleado, HttpServletResponse response) {
+    public ResponseEntity<?> generarPdf(@PathVariable String numEmpleado, HttpServletResponse response) {
         try {
             byte[] pdfBytes = servicioE.generatePdfSueldoNeto(numEmpleado);
 
