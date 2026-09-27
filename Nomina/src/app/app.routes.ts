@@ -11,9 +11,14 @@ import { Guardar } from './Componentes/guardar/guardar';
 import { EditarDocumentos } from './Componentes/editar-documentos/editar-documentos';
 import { ListarUsuarios } from './Componentes/listar-usuarios/listar-usuarios';
 import { EditarUsuarios } from './Componentes/editar-usuarios/editar-usuarios';
+import { RecuperarPassword } from './Componentes/recuperar-password/recuperar-password';
 
 export const routes: Routes = [
 
+    {
+        path: 'actualizar-password',
+        component: RecuperarPassword
+    },
     {
         path: 'registros',
         component: GuardarUsuarios

@@ -10,6 +10,11 @@ CREATE OR REPLACE PACKAGE PA_USUARIOS AS
         PA_ROL       IN  VARCHAR
     );
     
+    PROCEDURE SP_UPDTPASSWORD(
+        PA_USER      IN  VARCHAR,
+        PA_PASSWORD  IN  VARCHAR
+    );
+    
     PROCEDURE SP_UPTUSUARIO(
         PA_ID        IN  VARCHAR,
         PA_USER      IN  VARCHAR,

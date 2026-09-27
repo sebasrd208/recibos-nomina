@@ -66,4 +66,8 @@ export class Login {
   registro() {
     this.router.navigate(['registros']);
   }
+
+  recuperar(){
+    this.router.navigate(['actualizar-password']);
+  }
 }

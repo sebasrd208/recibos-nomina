@@ -237,6 +237,10 @@ public interface MapeoGeneral {
     @Options(statementType = StatementType.CALLABLE)
     public void SP_SETUSUARIO(Map<String, Object> params);
 
+    @Select(GeneralValue.SP_UPDTPASSWORD)
+    @Options(statementType = StatementType.CALLABLE)
+    public void SP_UPDTPASSWORD(Map<String, Object> params);
+
     @Select(GeneralValue.SP_UPTUSUARIO)
     @Options(statementType = StatementType.CALLABLE)
     public void SP_UPTUSUARIO(Map<String, Object> params);

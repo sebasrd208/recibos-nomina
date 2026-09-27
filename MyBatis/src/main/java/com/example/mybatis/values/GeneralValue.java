@@ -134,6 +134,13 @@ public class GeneralValue {
             + "  #{rec_cursor,  mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=r_SP_GETUSUARIOS}"
             + ")}";
 
+    public static final String SP_UPDTPASSWORD
+            = "{ call PA_USUARIOS.SP_UPDTPASSWORD ("
+            + "  #{PA_USER,     mode=IN, jdbcType=VARCHAR},"
+            + "  #{PA_PASSWORD, mode=IN, jdbcType=VARCHAR}"
+            + ")"
+            + "}";
+
     public static final String SP_SETUSUARIO
             = "{ call PA_USUARIOS.SP_SETUSUARIO ("
             + "  #{PA_USER,     mode=IN, jdbcType=VARCHAR},"

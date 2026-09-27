@@ -40,6 +40,17 @@ public class UsuariosController {
         }
     }
 
+    @PutMapping("/actualizar-password")
+    @Operation(summary = "Actualizar usuario", description = "Actualiza los datos de un usuario existente")
+    public ResponseEntity<?> actualizarPassword(@RequestParam String username, @RequestParam String password){
+        try {
+            service.actualizarPassword(username, password);
+            return ResponseEntity.status(HttpStatus.OK).body("{\"Mensaje\":\"Se actualizó la contraseña del usuario "+username+"\"}");
+        } catch (RuntimeException s) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(s.getMessage().lines().findFirst().orElse("").trim());
+        }
+    }
+
     @GetMapping("/username")
     @Operation(summary = "Mostrar usuario", description = "Muestra los datos del usuario")
     public ResponseEntity<?> mostrarUsuario(@RequestParam String usuario) {

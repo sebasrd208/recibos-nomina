@@ -79,6 +79,18 @@ public class UsuariosService implements UserDetailsService {
         }
     }
 
+    public void actualizarPassword(String username, String password){
+        Map<String, Object> params = new HashMap<>();
+        params.put("PA_USER", username);
+        params.put("PA_PASSWORD", encoder.encode(password));
+
+        try {
+            mapeo.SP_UPDTPASSWORD(params);
+        } catch (DataAccessException s) {
+            throw new RuntimeException(s.getMostSpecificCause().getMessage());
+        }
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UsuariosDTO usuario = obtenerUsuario(username);

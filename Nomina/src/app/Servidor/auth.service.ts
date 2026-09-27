@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Rol, Usuarios } from '../Entidades/Usuarios';
@@ -93,5 +93,17 @@ export class AuthService {
 
   eliminar(username: string) {
     return this.http.delete(this.url + '/eliminar?username=' + username);
+  }
+
+  actualizarPassword(username: string, password: string): Observable<any> {
+    const params = new HttpParams()
+      .set('username', username)
+      .set('password', password);
+
+    return this.http.put(
+      `${this.url}/actualizar-password`,
+      null,
+      { params }
+    );
   }
 }
