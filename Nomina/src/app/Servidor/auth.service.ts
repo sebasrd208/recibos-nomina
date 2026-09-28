@@ -100,8 +100,9 @@ export class AuthService {
       .set('username', username)
       .set('password', password);
 
+    
     return this.http.put(
-      `${this.url}/actualizar-password`,
+      this.url + '/actualizar-password',
       null,
       { params }
     );
