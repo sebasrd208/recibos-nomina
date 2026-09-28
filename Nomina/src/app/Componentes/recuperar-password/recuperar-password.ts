@@ -39,9 +39,6 @@ export class RecuperarPassword {
             this.login();
           }
         });
-      },
-      error: () => {
-        Swal.fire('Error', 'Usuario no encontrado', 'error');
       }
     });
   }
@@ -58,7 +55,13 @@ export class RecuperarPassword {
         console.log(JSON.stringify(dato));
       }, error: (error) => {
         this.usuarioEncontrado = false;
-        Swal.fire('USUARIO NO ENCONTRADO', 'El usuario '+this.username+' no existe', 'error');
+        Swal.fire({
+          title: 'USUARIO NO ENCONTRADO',
+          text: 'El usuario ' + this.username + ' no existe',
+          icon: 'error'
+        }).then(()=>{
+          this.username = '';
+        });        
         console.log(JSON.stringify(error))
       }
     });
