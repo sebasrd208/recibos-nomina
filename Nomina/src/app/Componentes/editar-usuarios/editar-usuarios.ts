@@ -62,6 +62,7 @@ export class EditarUsuarios implements OnInit {
       Swal.fire('ADVERTENCIA', 'Las contraseñas no coinciden', 'warning');
       return;
     }
+    
     console.log(this.usuario);
     this.auth.editar(this.usuario).subscribe({
       next: () => {

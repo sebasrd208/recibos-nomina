@@ -61,13 +61,13 @@ export class Login {
         this.authService.logout();
       }
     });
-  }  
+  }
 
   registro() {
     this.router.navigate(['registros']);
   }
 
   recuperar(){
-    this.router.navigate(['actualizar-password']);
+    this.router.navigate(['recuperar-password']);
   }
 }

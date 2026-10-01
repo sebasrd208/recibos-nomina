@@ -31,7 +31,7 @@ export class ListarCompanias implements OnInit {
         console.log(JSON.stringify(data));
       },
       error: () => {
-        Swal.fire('Error', 'No se pudieron cargar los pedidos', 'error');
+        Swal.fire('Error', 'No se pudieron cargar los compañias', 'error');
       },
     });
   }

@@ -33,7 +33,7 @@ export class ListarUsuarios implements OnInit {
         this.roles = [...new Set(data.map(e => e.rol))];
       },
       error: () => {
-        Swal.fire('Error', 'No se pudieron cargar los pedidos', 'error');
+        Swal.fire('Error', 'No se pudieron cargar los usuarios', 'error');
       },
     });
   }

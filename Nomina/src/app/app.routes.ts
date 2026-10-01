@@ -12,11 +12,12 @@ import { EditarDocumentos } from './Componentes/editar-documentos/editar-documen
 import { ListarUsuarios } from './Componentes/listar-usuarios/listar-usuarios';
 import { EditarUsuarios } from './Componentes/editar-usuarios/editar-usuarios';
 import { RecuperarPassword } from './Componentes/recuperar-password/recuperar-password';
+import { CambiarPassword } from './Componentes/cambiar-password/cambiar-password';
 
 export const routes: Routes = [
 
     {
-        path: 'actualizar-password',
+        path: 'recuperar-password',
         component: RecuperarPassword
     },
     {
@@ -71,7 +72,12 @@ export const routes: Routes = [
     {
         path: 'guardar',
         component: Guardar,
-        canActivate: [guardGuard],
+        canActivate: [guardGuard]
+    },
+    {
+        path:'actualizar-password',
+        component: CambiarPassword,
+        canActivate: [guardGuard]
     },
     {
         path: '',

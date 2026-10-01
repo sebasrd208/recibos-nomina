@@ -78,6 +78,11 @@ export class Navbar implements OnInit {
     this.router.navigate(['login']);
   }
 
+  actualizar() {
+    localStorage.setItem('usuario_key', this.username);
+    this.router.navigate(['actualizar-password']);
+  }
+
   registro() {
     this.router.navigate(['registros']);
   }

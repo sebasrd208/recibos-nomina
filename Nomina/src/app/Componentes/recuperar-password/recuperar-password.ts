@@ -68,15 +68,6 @@ export class RecuperarPassword {
   }
 
   login() {
-    if (this.isLoggedIn()) {
-      this.router.navigate(['listar-usuarios']);
-    } else {
-      this.router.navigate(['login']);
-    }
+    this.router.navigate(['login']);
   }
-
-  isLoggedIn() {
-    return this.auth.isLoggedIn();
-  }
-
 }
