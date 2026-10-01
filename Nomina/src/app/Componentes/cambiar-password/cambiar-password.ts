@@ -45,7 +45,6 @@ export class CambiarPassword implements OnInit {
               dato.usuario,
               this.password_nuevo
             ).subscribe({
-
               next: () => {
                 Swal.fire({
                   title: "ACTUALIZACIÓN EXITOSA",
