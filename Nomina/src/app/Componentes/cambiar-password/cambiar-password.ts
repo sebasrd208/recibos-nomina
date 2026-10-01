@@ -26,31 +26,7 @@ export class CambiarPassword implements OnInit {
 
   constructor(private router: Router, private auth: AuthService) { }
 
-  /* actualizar() {
-     if (!this.password_actual || !this.password_nuevo || !this.confirm_password) {
-       Swal.fire('ADVERTENCIA', 'Completa todos los campos', 'warning');
-       return;
-     }
- 
-     if (this.password_nuevo !== this.confirm_password) {
-       Swal.fire('ADVERTENCIA', 'Las contraseñas no coinciden', 'warning');
-       return;
-     }
- 
-     this.auth.buscarUsuarios(this.username).subscribe({
-       next: (dato) => {
-         this.auth.actualizarPassword(dato.usuario, this.password_nuevo).subscribe({
-           next: () => {
-             Swal.fire('ACTUALIZACION EXITOSA', 'Contraseña actualizada exitosamente', 'success');
-             this.login();
-           }
-         });
-       }
-     });
-   }*/
-
   actualizar() {
-
     if (!this.password_actual || !this.password_nuevo || !this.confirm_password) {
       Swal.fire('ADVERTENCIA', 'Completa todos los campos', 'warning');
       return;
@@ -122,9 +98,7 @@ export class CambiarPassword implements OnInit {
             'error'
           );
         }
-
       }
-
     });
   }
 
@@ -133,7 +107,6 @@ export class CambiarPassword implements OnInit {
       Swal.fire('ADVERTENCIA', 'Completa todos los campos', 'warning');
       return;
     }
-
     this.auth.buscarUsuarios(this.username).subscribe({
       next: (dato) => {
         console.log(JSON.stringify(dato));
