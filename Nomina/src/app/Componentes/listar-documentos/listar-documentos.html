@@ -6,10 +6,10 @@
                 ENVIAR PENDIENTES
             </button>
             <select class="form-select w-auto" [(ngModel)]="filtroEstado">
-                <option value="">TODOS</option>
-                <option value="0">PENDIENTE</option>
-                <option value="1">ENVIADO</option>
-                <option value="2">ERROR</option>
+                <option value="">Todos</option>
+                <option value="0">Pendiente</option>
+                <option value="1">Enviado</option>
+                <option value="2">Error</option>
             </select>
             <h3 class="text-muted m-0">
                 {{ textoFiltroDocumentos }}
@@ -64,9 +64,9 @@
                         <td> {{documento.correo}} </td>
                         <td>
                             {{
-                            documento.status === '0' ? 'PENDIENTE' :
-                            documento.status === '1' ? 'ENVIADO' :
-                            documento.status === '2' ? 'ERROR' :
+                            documento.status === '0' ? 'Pendiente' :
+                            documento.status === '1' ? 'Enviado' :
+                            documento.status === '2' ? 'Error' :
                             'DESCONOCIDO'
                             }}
                         </td>

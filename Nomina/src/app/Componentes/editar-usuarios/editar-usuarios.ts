@@ -18,9 +18,6 @@ export class EditarUsuarios implements OnInit {
     this.buscar();
   }
 
-  confirm = '';
-  showPassword: boolean = false;
-
   constructor(private router: Router, private auth: AuthService) { }
 
   usuario: Usuarios = {
@@ -36,7 +33,6 @@ export class EditarUsuarios implements OnInit {
     this.auth.buscarUsuarios(usuario).subscribe({
       next: (dato) => {
         this.usuario = dato;
-        this.usuario.password = '';
         console.log(JSON.stringify(dato));
 
         Swal.fire({
@@ -53,17 +49,11 @@ export class EditarUsuarios implements OnInit {
   }
 
   editar() {
-    if (!this.usuario.usuario || !this.usuario.password || !this.confirm) {
+    if (!this.usuario.usuario) {
       Swal.fire('ADVERTENCIA', 'Completa todos los campos', 'warning');
       return;
     }
 
-    if (this.usuario.password !== this.confirm) {
-      Swal.fire('ADVERTENCIA', 'Las contraseñas no coinciden', 'warning');
-      return;
-    }
-    
-    console.log(this.usuario);
     this.auth.editar(this.usuario).subscribe({
       next: () => {
         Swal.fire('Éxito', 'Usuario actualizado correctamente', 'success');

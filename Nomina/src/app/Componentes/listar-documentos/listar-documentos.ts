@@ -223,13 +223,13 @@ export class ListarDocumentos implements OnInit {
   get textoFiltroDocumentos(): string {
     switch (this.filtroEstado) {
       case '0':
-        return 'PENDIENTES: ' + this.totalFiltradosDocumentos;
+        return 'Pendientes: ' + this.totalFiltradosDocumentos;
       case '1':
-        return 'ENVIADOS: ' + this.totalFiltradosDocumentos;
+        return 'Enviados: ' + this.totalFiltradosDocumentos;
       case '2':
-        return 'ERRONÉOS: ' + this.totalFiltradosDocumentos;
+        return 'Erronéos: ' + this.totalFiltradosDocumentos;
       default:
-        return 'TOTAL: ' + this.totalFiltradosDocumentos;
+        return 'Total: ' + this.totalFiltradosDocumentos;
     }
   }
 }

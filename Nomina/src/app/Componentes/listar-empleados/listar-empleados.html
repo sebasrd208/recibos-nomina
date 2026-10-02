@@ -3,7 +3,7 @@
         <h3 class="mb-3">EMPLEADOS</h3>
         <div class="d-flex justify-content-end align-items-center gap-3">                      
             <select class="form-select w-auto" [(ngModel)]="filtroSeccion">
-                <option value="">TODOS</option>
+                <option value="">Todos</option>
                 @for (sec of secciones; track sec) {
                 <option [value]="sec">
                     {{ sec }}
@@ -12,7 +12,7 @@
             </select>
             <h3 class="text-muted m-0">
                 {{ textoFiltroEmpleados }}
-            </h3>  
+            </h3>
         </div>
     </div>
     <div class="card shadow">

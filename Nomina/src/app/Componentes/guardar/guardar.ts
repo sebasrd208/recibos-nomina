@@ -52,7 +52,7 @@ export class Guardar {
   cancelar() {
     Swal.fire({
       title: 'Cancelado!',
-      text: 'Se ha cancelado la modificación...',
+      text: 'Se ha cancelado el registro...',
       showConfirmButton: false,
       icon: 'warning',
     });

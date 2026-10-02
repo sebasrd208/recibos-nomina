@@ -66,10 +66,12 @@ public class UsuariosService implements UserDetailsService {
     }
 
     public void actualizarUsuarios(UsuariosDTO dto) {
+        UsuariosDTO usuarioActual = obtenerUsuario(dto.getUsuario());
+
         Map<String, Object> params = new HashMap<>();
         params.put("PA_ID", dto.getIdUsuario());
         params.put("PA_USER", dto.getUsuario());
-        params.put("PA_PASSWORD", encoder.encode(dto.getPassword()));
+        params.put("PA_PASSWORD", usuarioActual.getPassword());
         params.put("PA_ROL", String.valueOf(dto.getRol()));
 
         try {

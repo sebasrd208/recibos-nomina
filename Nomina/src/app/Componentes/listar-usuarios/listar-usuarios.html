@@ -1,25 +1,26 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4" style="user-select: none;">
         <h3>USUARIOS</h3>
-        <div class="d-flex justify-content-end align-items-center gap-3">                      
+        <div class="d-flex justify-content-end align-items-center gap-3">
             <select class="form-select w-auto" [(ngModel)]="filtroRoles">
-                <option value="">TODOS</option>
+                <option value="">Todos</option>
                 @for (rol of roles; track rol) {
                 <option [value]="rol">
-                    {{ rol }}
+                    {{ rol === Rol.ADMIN ? 'Administrador' :
+                    rol === Rol.USER ? 'Usuario' : 'Sin rol' }}
                 </option>
                 }
             </select>
             <h3 class="text-muted m-0">
                 {{ textoFiltroEmpleados }}
-            </h3>  
+            </h3>
         </div>
     </div>
     <div class="card shadow">
         <div class="card-body" style="user-select: none;">
             <table class="table table-hover align-middle text-center">
                 <thead class="table-dark">
-                    <tr>                     
+                    <tr>
                         <th (click)="ordenarUsuarios('idUsuario')">
                             #
                             <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='idUsuario' && sortDirection==='asc', 'bi-caret-down-fill':
@@ -40,15 +41,21 @@
                 </thead>
                 <tbody>
                     @for (usuario of usuariosFiltrados(); track $index) {
-                    <tr>                        
-                        <td> {{usuario.idUsuario}} </td>                        
+                    <tr>
+                        <td> {{usuario.idUsuario}} </td>
                         <td> {{usuario.usuario}} </td>
-                        <td> {{usuario.rol}} </td>
                         <td>
-                            <button class="btn btn-danger btn-sm" (click)="eliminar(usuario.usuario)" title='Eliminar usuario'>
+                            {{usuario.rol === Rol.ADMIN ? 'Administrador' :
+                            usuario.rol === Rol.USER ? 'Usuario': 'Sin rol'
+                            }}
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" (click)="eliminar(usuario.usuario)"
+                                title='Eliminar usuario'>
                                 <i class="bi bi-trash"></i>
                             </button>
-                            <button class="btn btn-lg btn-warning btn-sm" (click)="editar(usuario)" title='Actualizar usuario'>
+                            <button class="btn btn-lg btn-warning btn-sm" (click)="editar(usuario)"
+                                title='Actualizar usuario'>
                                 <i class="bi bi-pencil"></i>
                             </button>
                         </td>

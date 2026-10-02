@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Servidor/auth.service';
-import { Usuarios } from '../../Entidades/Usuarios';
+import { Rol, Usuarios } from '../../Entidades/Usuarios';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -25,8 +25,9 @@ export class ListarUsuarios implements OnInit {
   roles: string[] = [];
   sortColumn: keyof Usuarios = 'idUsuario';
   sortDirection: 'asc' | 'desc' = 'asc';
+  Rol = Rol;
 
-  listar() {
+  /*listar() {
     this.auth.listarUsuarios().subscribe({
       next: (data) => {
         this.usuarios = data;
@@ -34,6 +35,33 @@ export class ListarUsuarios implements OnInit {
       },
       error: () => {
         Swal.fire('Error', 'No se pudieron cargar los usuarios', 'error');
+      },
+    });
+  }*/
+
+  listar() {
+    this.auth.listarUsuarios().subscribe({
+      next: (data) => {
+
+        const usuarioActual = this.auth.getUser();
+
+        if (usuarioActual?.rol === Rol.ADMIN) {
+          this.usuarios = data.filter(
+            usuario => usuario.usuario !== usuarioActual.usuario
+          );
+        } else {
+          this.usuarios = data;
+        }
+
+        this.roles = [...new Set(this.usuarios.map(e => e.rol))];
+      },
+
+      error: () => {
+        Swal.fire(
+          'Error',
+          'No se pudieron cargar los usuarios',
+          'error'
+        );
       },
     });
   }
@@ -108,9 +136,11 @@ export class ListarUsuarios implements OnInit {
 
   get textoFiltroEmpleados(): string {
     if (!this.filtroRoles) {
-      return 'TOTAL: '+this.totalFiltradosEmpleados;
+      return 'Total: ' + this.totalFiltradosEmpleados;
     }
+    const rolTexto = this.filtroRoles === Rol.ADMIN ? 'Administrador' :
+      this.filtroRoles === Rol.USER ? 'Usuario' : 'Sin rol';
 
-    return this.filtroRoles+": "+this.totalFiltradosEmpleados;
+    return rolTexto + ': ' + this.totalFiltradosEmpleados;
   }
 }

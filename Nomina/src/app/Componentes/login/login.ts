@@ -26,10 +26,10 @@ export class Login {
 
   login() {
 
-    if (!this.username || !this.password) {
+    /*if (!this.username || !this.password) {
       Swal.fire('Error', 'Completa todos los campos', 'error');
       return;
-    }
+    }*/
 
     this.authService.login(this.username, this.password).subscribe({
       next: (user) => {
