@@ -27,18 +27,6 @@ export class ListarUsuarios implements OnInit {
   sortDirection: 'asc' | 'desc' = 'asc';
   Rol = Rol;
 
-  /*listar() {
-    this.auth.listarUsuarios().subscribe({
-      next: (data) => {
-        this.usuarios = data;
-        this.roles = [...new Set(data.map(e => e.rol))];
-      },
-      error: () => {
-        Swal.fire('Error', 'No se pudieron cargar los usuarios', 'error');
-      },
-    });
-  }*/
-
   listar() {
     this.auth.listarUsuarios().subscribe({
       next: (data) => {
