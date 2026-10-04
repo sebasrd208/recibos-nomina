@@ -179,6 +179,23 @@ public class DocumentoControllerTest {
     }
 
     @Test
+    void buscar_debeRetornarCompaniaConStatus200() {
+
+        String numEmpleado = "12345";
+        DocumentoDTO dto = new DocumentoDTO();
+
+        when(service.byNumEmpleado(numEmpleado))
+                .thenReturn(dto);
+
+        ResponseEntity<?> respuesta = controller.buscar(numEmpleado);
+
+        assertEquals(HttpStatus.OK, respuesta.getStatusCode());
+        assertEquals(dto, respuesta.getBody());
+
+        verify(service).byNumEmpleado(numEmpleado);
+    }
+
+    @Test
     void buscar_debeRetornarBadRequestSiOcurreError() {
 
         String numEmpleado = "12345";
@@ -194,23 +211,6 @@ public class DocumentoControllerTest {
 
         assertEquals(HttpStatus.BAD_REQUEST, respuesta.getStatusCode());
         assertEquals("Documento no encontrado", respuesta.getBody());
-
-        verify(service).byNumEmpleado(numEmpleado);
-    }
-
-    @Test
-    void buscar_debeRetornarCompaniaConStatus200() {
-
-        String numEmpleado = "12345";
-        DocumentoDTO dto = new DocumentoDTO();
-
-        when(service.byNumEmpleado(numEmpleado))
-                .thenReturn(dto);
-
-        ResponseEntity<?> respuesta = controller.buscar(numEmpleado);
-
-        assertEquals(HttpStatus.OK, respuesta.getStatusCode());
-        assertEquals(dto, respuesta.getBody());
 
         verify(service).byNumEmpleado(numEmpleado);
     }

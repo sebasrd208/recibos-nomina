@@ -76,28 +76,7 @@ public class EmpleadoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(s.getMessage().lines().findFirst().orElse("").trim());
         }
     }
-
-    @GetMapping("/neto/pdf/{numEmpleado}")
-    @Operation(summary = "Mostrar sueldo neto", description = "Muestra un sueldo neto de un empleado especifico")
-    public ResponseEntity<?> generarPdf(@PathVariable String numEmpleado, HttpServletResponse response) {
-        try {
-            byte[] pdfBytes = servicioE.generatePdfSueldoNeto(numEmpleado);
-
-            if (pdfBytes == null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            response.setContentType("application/pdf");
-            response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
-                    "attachment; filename=\"Recibo_" + numEmpleado + ".pdf\"");
-            response.getOutputStream().write(pdfBytes);
-            response.getOutputStream().flush();
-            return ResponseEntity.ok().build();
-        } catch (Exception s) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(s.getCause().getMessage().lines().findFirst().orElse("").trim());
-        }
-    }
-
+    
     @PostMapping("/enviar")
     @Operation(summary = "Correo con archivo adjunto", description = "Este prueba envia un correo con un archivo adjunto")
     public ResponseEntity<String> enviarCorreo(@RequestParam String correo, @RequestParam String nombre) {
