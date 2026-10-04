@@ -60,7 +60,7 @@ public class EmpleadoControllerTest {
     }
 
     @Test
-    void mostrarSueldo_debeRetornarCompaniaConStatus200() {
+    void mostrarSueldo_debeRetornarSueldoConStatus200() {
 
         String numEmpleado = "12345";
         SueldoNetoDTO dto = new SueldoNetoDTO();
@@ -97,7 +97,7 @@ public class EmpleadoControllerTest {
     }
 
     @Test
-    void buscar_debeRetornarCompaniaConStatus200() {
+    void buscar_debeRetornarEmpleadoConStatus200() {
 
         String numEmpleado = "12345";
         EmpleadoDTO dto = new EmpleadoDTO();
@@ -167,7 +167,7 @@ public class EmpleadoControllerTest {
     }
 
     @Test
-    void actualizar_debeRetornarCreatedSiInsertaCorrectamente() {
+    void actualizar_debeRetornarCreatedSiActualizoCorrectamente() {
 
         EmpleadoDTO dto = new EmpleadoDTO();
 

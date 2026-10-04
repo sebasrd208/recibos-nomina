@@ -23,8 +23,12 @@ public class EnvioController {
     @PostMapping("/pendientes")
     @Operation(summary = "Envios pendientes", description = "Envia correos con estatus 0")
     public ResponseEntity<?> enviarCorreosPendientes(){
-        ResultadoEnvioDTO resultado = servicio.procesoEnvioCorreos();
-        return ResponseEntity.ok(resultado);
+        try {
+            ResultadoEnvioDTO resultado = servicio.procesoEnvioCorreos();
+            return ResponseEntity.ok(resultado);
+        }catch(Exception s){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(s.getCause().getMessage().lines().findFirst().orElse("").trim());
+        }
     }
 
     @PatchMapping("/sueldo/pdf")

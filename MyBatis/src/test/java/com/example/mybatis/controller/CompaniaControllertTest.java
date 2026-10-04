@@ -36,7 +36,6 @@ public class CompaniaControllertTest {
         verify(servicio).obtenerCompanias();
     }
 
-
     @Test
     void mostrarCompanias_debeRetornarBadRequestSiOcurreError() {
 
@@ -53,7 +52,6 @@ public class CompaniaControllertTest {
 
         verify(servicio).obtenerCompanias();
     }
-
 
     @Test
     void guardar_debeRetornarCreatedSiInsertaCorrectamente() {
