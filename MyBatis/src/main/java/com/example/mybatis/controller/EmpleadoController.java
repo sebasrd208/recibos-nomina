@@ -6,7 +6,6 @@ import org.springframework.http.*;
 import com.example.mybatis.service.*;
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.tags.*;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.*;
 
@@ -76,7 +75,7 @@ public class EmpleadoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(s.getMessage().lines().findFirst().orElse("").trim());
         }
     }
-    
+
     @PostMapping("/enviar")
     @Operation(summary = "Correo con archivo adjunto", description = "Este prueba envia un correo con un archivo adjunto")
     public ResponseEntity<String> enviarCorreo(@RequestParam String correo, @RequestParam String nombre) {
