@@ -32,13 +32,6 @@ export class AuthService {
     return this.http.get<Usuarios>(this.url + '/username?usuario=' + username);
   }
 
-  /*login(usuario: string, password: string): Observable<Usuarios> {
-    return this.http.post<Usuarios>(this.url + '/login', {
-      usuario,
-      password
-    });
-  }*/
-
   login(usuario: string, password: string): Observable<any> {
     const params = new HttpParams()
       .set('usuario', usuario)

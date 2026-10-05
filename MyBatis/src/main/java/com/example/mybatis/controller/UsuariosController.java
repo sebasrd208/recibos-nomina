@@ -73,22 +73,6 @@ public class UsuariosController {
         }
     }
 
-    /*@PostMapping("/login")
-    @Operation(summary = "Autenticación de usuarios", description = "Autentica los usuario y verifica los roles de tal usuario")
-    public ResponseEntity<?> login(@RequestBody LoginDTO credencial) {
-        try {
-            UsuariosDTO username = service.login(credencial.getUsuario(), credencial.getPassword());
-
-            if (username == null) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body("Usuario o contraseña incorrectos");
-            }
-            return ResponseEntity.ok(username);
-        }catch(Exception s){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(s.getCause().getMessage().lines().findFirst().orElse("").trim());
-        }
-    }*/
-
     @PostMapping("/login")
     @Operation(summary = "Autenticación de usuarios", description = "Autentica los usuario y verifica los roles de tal usuario")
     public ResponseEntity<?> login(@RequestParam String usuario, @RequestParam String password) {
