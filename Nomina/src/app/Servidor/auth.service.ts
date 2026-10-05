@@ -32,11 +32,23 @@ export class AuthService {
     return this.http.get<Usuarios>(this.url + '/username?usuario=' + username);
   }
 
-  login(usuario: string, password: string): Observable<Usuarios> {
+  /*login(usuario: string, password: string): Observable<Usuarios> {
     return this.http.post<Usuarios>(this.url + '/login', {
       usuario,
       password
     });
+  }*/
+
+  login(usuario: string, password: string): Observable<any> {
+    const params = new HttpParams()
+      .set('usuario', usuario)
+      .set('password', password);
+
+    return this.http.post(
+      this.url + '/login',
+      null,
+      { params }
+    );
   }
 
   getRole(): Rol | null {
@@ -100,7 +112,7 @@ export class AuthService {
       .set('username', username)
       .set('password', password);
 
-    
+
     return this.http.put(
       this.url + '/actualizar-password',
       null,

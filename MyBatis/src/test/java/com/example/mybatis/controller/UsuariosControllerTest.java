@@ -1,6 +1,5 @@
 package com.example.mybatis.controller;
 
-import com.example.mybatis.dto.LoginDTO;
 import com.example.mybatis.dto.Rol;
 import com.example.mybatis.dto.UsuariosDTO;
 import com.example.mybatis.service.UsuariosService;
@@ -201,19 +200,17 @@ public class UsuariosControllerTest {
     @Test
     void login_debeRetornarOkSiCredencialesSonCorrectas() {
 
-        LoginDTO credencial = new LoginDTO();
-        credencial.setUsuario("sebas");
-        credencial.setPassword("123456");
+        String usuario = "Sebastian", password = "249901";
 
-        UsuariosDTO usuario = new UsuariosDTO();
-        usuario.setUsuario("sebas");
-        usuario.setRol(Rol.ADMIN);
+        UsuariosDTO usuarioDTO = new UsuariosDTO();
+        usuarioDTO.setUsuario("Sebastian");
+        usuarioDTO.setRol(Rol.ADMIN);
 
-        when(service.login("sebas", "123456"))
-                .thenReturn(usuario);
+        when(service.login("Sebastian", "249901"))
+                .thenReturn(usuarioDTO);
 
         ResponseEntity<?> respuesta =
-                controller.login(credencial);
+                controller.login(usuario, password);
 
         assertEquals(
                 HttpStatus.OK,
@@ -221,25 +218,23 @@ public class UsuariosControllerTest {
         );
 
         assertEquals(
-                usuario,
+                usuarioDTO,
                 respuesta.getBody()
         );
 
-        verify(service).login("sebas", "123456");
+        verify(service).login("Sebastian", "249901");
     }
 
     @Test
     void login_debeRetornarUnauthorizedSiCredencialesSonIncorrectas() {
 
-        LoginDTO credencial = new LoginDTO();
-        credencial.setUsuario("sebas");
-        credencial.setPassword("incorrecta");
+        String usuario = "Sebastian", password = "incorrecta";
 
-        when(service.login("sebas", "incorrecta"))
+        when(service.login("Sebastian", "incorrecta"))
                 .thenReturn(null);
 
         ResponseEntity<?> respuesta =
-                controller.login(credencial);
+                controller.login(usuario, password);
 
         assertEquals(
                 HttpStatus.UNAUTHORIZED,
@@ -251,25 +246,23 @@ public class UsuariosControllerTest {
                 respuesta.getBody()
         );
 
-        verify(service).login("sebas", "incorrecta");
+        verify(service).login("Sebastian", "incorrecta");
     }
 
     @Test
     void login_debeRetornarUnauthorizedSiOcurreError() {
 
-        LoginDTO credencial = new LoginDTO();
-        credencial.setUsuario("sebas");
-        credencial.setPassword("123456");
+        String usuario = "Sebastian", password = "123456";
 
         RuntimeException exception = new RuntimeException(
                 new RuntimeException("Error al consultar usuario")
         );
 
-        when(service.login("sebas", "123456"))
+        when(service.login("Sebastian", "123456"))
                 .thenThrow(exception);
 
         ResponseEntity<?> respuesta =
-                controller.login(credencial);
+                controller.login(usuario, password);
 
         assertEquals(
                 HttpStatus.UNAUTHORIZED,
@@ -281,7 +274,7 @@ public class UsuariosControllerTest {
                 respuesta.getBody()
         );
 
-        verify(service).login("sebas", "123456");
+        verify(service).login("Sebastian", "123456");
     }
 
     @Test
