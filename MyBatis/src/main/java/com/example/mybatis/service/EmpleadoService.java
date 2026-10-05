@@ -22,7 +22,7 @@ public class EmpleadoService {
         Map<String, Object> params = new HashMap<>();
         params.put("PA_EMPLEADO", numEmpleado);
 
-        mapeo.SP_GET_EMPLEADO(params);
+        mapeo.SP_GETNOMINA(params);
 
         List<SueldoNetoDTO> empleados = (List<SueldoNetoDTO>) params.get("rec_cursor");
 
@@ -33,7 +33,7 @@ public class EmpleadoService {
         Map<String, Object> params = new HashMap<>();
         params.put("PA_EMPLEADO", numEmpleado);
 
-        mapeo.SP_GET_EMPLEADO(params);
+        mapeo.SP_GETNOMINA(params);
 
         List<SueldoNetoDTO> empleados = (List<SueldoNetoDTO>) params.get("rec_cursor");
 
@@ -46,7 +46,7 @@ public class EmpleadoService {
 
     public List<EmpleadoDTO> obtenerEmpleados() {
         Map<String, Object> params = new HashMap<>();
-        mapeo.SP_GETEMPLEADO(params);
+        mapeo.SP_GETEMPLEADOS(params);
 
         List<EmpleadoDTO> empleados = (List<EmpleadoDTO>) params.get("rec_cursor");
 
@@ -57,7 +57,7 @@ public class EmpleadoService {
         Map<String, Object> params = new HashMap<>();
         params.put("PA_EMPLEADO", numEmpleado);
 
-        mapeo.SP_GETEMPLOYEE(params);
+        mapeo.SP_GETEMPLEADO(params);
 
         List<EmpleadoDTO> empleados = (List<EmpleadoDTO>) params.get("rec_cursor");
 

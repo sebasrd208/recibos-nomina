@@ -36,7 +36,7 @@ public class EmpleadoController {
     @Operation(summary = "Mostrar sueldo neto", description = "Muestra un sueldo neto de un empleado especifico")
     public ResponseEntity<?> mostrarSueldo(@RequestParam String numEmpleado) {
         try {
-            SueldoNetoDTO usuario = servicio.obtenerSueldoCifrado(numEmpleado);
+            SueldoNetoDTO usuario = servicio.obtenerSueldo(numEmpleado);
             return ResponseEntity.ok(usuario);
         }catch(Exception s){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(s.getCause().getMessage().lines().findFirst().orElse("").trim());

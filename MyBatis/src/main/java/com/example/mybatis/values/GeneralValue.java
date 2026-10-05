@@ -4,9 +4,9 @@ public class GeneralValue {
 
     //------------------------------------------EMPLEADO---------------------------------------------------
     
-    public static final String SP_GETEMPLEADO
-            = "{ call PA_EMPLEADOS.SP_GETEMPLEADO ("
-            + "  #{rec_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=r_SP_GETEMPLEADO}"
+    public static final String SP_GETEMPLEADOS
+            = "{ call PA_EMPLEADOS.SP_GETEMPLEADOS ("
+            + "  #{rec_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=r_SP_GETEMPLEADOS}"
             + ") "
             + "}";
         
@@ -28,9 +28,9 @@ public class GeneralValue {
             + ")"
             + "}";
 
-    public static final String SP_GETEMPLOYEE
-            = "{ call PA_EMPLEADOS.SP_GETEMPLOYEE ("
-            + "  #{rec_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=r_SP_GETEMPLOYEE},"
+    public static final String SP_GETEMPLEADO
+            = "{ call PA_EMPLEADOS.SP_GETEMPLEADO ("
+            + "  #{rec_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=r_SP_GETEMPLEADO},"
             + "  #{PA_EMPLEADO,    mode=IN, jdbcType=VARCHAR}"
             + ") "
             + "}";
@@ -74,9 +74,9 @@ public class GeneralValue {
             + ")"
             + "}";
 
-    public static final String SP_GET_EMPLEADO
-            = "{ call PA_DOCUMENTO.SP_GETEMPLEADO ("
-            + "  #{rec_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=r_SP_GET_EMPLEADO},"
+    public static final String SP_GETNOMINA
+            = "{ call PA_DOCUMENTO.SP_GETNOMINA ("
+            + "  #{rec_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=r_SP_GETNOMINA},"
             + "  #{PA_EMPLEADO,    mode=IN, jdbcType=VARCHAR}"
             + ") "
             + "}";

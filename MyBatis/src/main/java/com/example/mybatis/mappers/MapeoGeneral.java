@@ -11,7 +11,7 @@ public interface MapeoGeneral {
 
     //EMPLEADOS
     @Results(
-            id = "r_SP_GETEMPLEADO",
+            id = "r_SP_GETEMPLEADOS",
             value = {
                 @Result(property = "idEmpleado", column = "ID_EMPLEADO", id = true),
                 @Result(property = "telefono", column = "TELEFONO"),
@@ -22,13 +22,13 @@ public interface MapeoGeneral {
                 @Result(property = "numEmpleado", column = "NUM_EMPLEADO")
             }
     )
-    @Select(GeneralValue.SP_GETEMPLEADO)
+    @Select(GeneralValue.SP_GETEMPLEADOS)
     @Options(statementType = StatementType.CALLABLE)
     @ResultType(EmpleadoDTO.class)
-    public void SP_GETEMPLEADO(Map<String, Object> params);
+    public void SP_GETEMPLEADOS(Map<String, Object> params);
 
     @Results(
-            id = "r_SP_GETEMPLOYEE",
+            id = "r_SP_GETEMPLEADO",
             value = {
                     @Result(property = "idEmpleado", column = "ID_EMPLEADO", id = true),
                     @Result(property = "telefono", column = "TELEFONO"),
@@ -39,10 +39,10 @@ public interface MapeoGeneral {
                     @Result(property = "numEmpleado", column = "NUM_EMPLEADO")
             }
     )
-    @Select(GeneralValue.SP_GETEMPLOYEE)
+    @Select(GeneralValue.SP_GETEMPLEADO)
     @Options(statementType = StatementType.CALLABLE)
     @ResultType(EmpleadoDTO.class)
-    public void SP_GETEMPLOYEE(Map<String, Object> params);
+    public void SP_GETEMPLEADO(Map<String, Object> params);
 
     @Select(GeneralValue.SP_INSERT_EMPLEADOS)
     @Options(statementType = StatementType.CALLABLE)
@@ -258,7 +258,7 @@ public interface MapeoGeneral {
     public void SP_BORRADO_UNIVERSAL(Map<String, Object> params);
 
     @Results(
-            id = "r_SP_GET_EMPLEADO",
+            id = "r_SP_GETNOMINA",
             value = {
                     @Result(property = "empleado.nombre", column = "NOMBRE"),
                     @Result(property = "empleado.apellido", column = "APELLIDO"),
@@ -275,9 +275,9 @@ public interface MapeoGeneral {
                     @Result(property = "sueldoNeto", column = "SUELDO_NET")
             }
     )
-    @Select(GeneralValue.SP_GET_EMPLEADO)
+    @Select(GeneralValue.SP_GETNOMINA)
     @Options(statementType = StatementType.CALLABLE)
     @ResultType(SueldoNetoDTO.class)
-    public void SP_GET_EMPLEADO(Map<String, Object> params);
+    public void SP_GETNOMINA(Map<String, Object> params);
 
 }
