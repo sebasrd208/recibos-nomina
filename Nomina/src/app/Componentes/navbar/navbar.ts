@@ -11,11 +11,10 @@ import { Rol } from '../../Entidades/Usuarios';
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
+
 export class Navbar implements OnInit {
 
   username: string = '';
-  nombre: string = 'Administrador';
-
   rol: string = '';
 
   ngOnInit(): void {

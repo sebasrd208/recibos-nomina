@@ -6,6 +6,7 @@ import { Rol, Usuarios } from '../Entidades/Usuarios';
 @Injectable({
   providedIn: 'root',
 })
+
 export class AuthService {
 
   constructor(private http: HttpClient) { }

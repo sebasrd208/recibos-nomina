@@ -63,7 +63,6 @@ export const routes: Routes = [
         component: EditarDocumentos,
         canActivate: [guardGuard]
     },
-    
     {
         path: 'editar-usuarios',
         component: EditarUsuarios,
