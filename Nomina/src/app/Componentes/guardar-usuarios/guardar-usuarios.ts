@@ -17,17 +17,18 @@ export class GuardarUsuarios {
   confirm = '';
   showPassword: boolean = false;
 
-  constructor(private router: Router, private auth: AuthService){}
+  constructor(private router: Router, private auth: AuthService) { }
 
   usuario: Usuarios = {
     idUsuario: 0,
     usuario: '',
     password: '',
+    nombreCompleto: '',
     rol: Rol.USER
   }
 
   registrar() {
-    if (!this.usuario.usuario || !this.usuario.password || !this.confirm) {
+    if (!this.usuario.nombreCompleto || !this.usuario.usuario || !this.usuario.password || !this.confirm) {
       Swal.fire('ADVERTENCIA', 'Completa todos los campos', 'warning');
       return;
     }
@@ -42,11 +43,7 @@ export class GuardarUsuarios {
     this.auth.registrar(this.usuario).subscribe({
       next: () => {
         Swal.fire('Éxito', 'Usuario registrado correctamente', 'success');
-        if (this.isLoggedIn()) {    
-          this.router.navigate(['listar-usuarios']);
-        }else{
-          this.router.navigate(['login']);
-        }
+        this.router.navigate(['login']);
       },
       error: (error) => {
         console.log(JSON.stringify(error));
@@ -56,14 +53,6 @@ export class GuardarUsuarios {
   }
 
   login() {
-    if (this.isLoggedIn()) {
-      this.router.navigate(['listar-usuarios']);
-    } else {
-      this.router.navigate(['login']);
-    }
-  }
-
-  isLoggedIn() {
-    return this.auth.isLoggedIn();
+    this.router.navigate(['login'])
   }
 }

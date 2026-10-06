@@ -56,6 +56,7 @@ public class UsuariosService implements UserDetailsService {
         Map<String, Object> params = new HashMap<>();
         params.put("PA_USER", dto.getUsuario());
         params.put("PA_PASSWORD", encoder.encode(dto.getPassword()));
+        params.put("PA_NOMBRE", dto.getNombreCompleto());
         params.put("PA_ROL", String.valueOf(dto.getRol()));
 
         try {
@@ -72,6 +73,7 @@ public class UsuariosService implements UserDetailsService {
         params.put("PA_ID", dto.getIdUsuario());
         params.put("PA_USER", dto.getUsuario());
         params.put("PA_PASSWORD", usuarioActual.getPassword());
+        params.put("PA_NOMBRE", dto.getNombreCompleto());
         params.put("PA_ROL", String.valueOf(dto.getRol()));
 
         try {

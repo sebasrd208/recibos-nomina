@@ -209,9 +209,10 @@ public interface MapeoGeneral {
             id = "r_SP_GETUSUARIO",
             value = {
                     @Result(property = "idUsuario", column = "ID_USUARIO", id = true),
-                    @Result(property = "usuario",      column = "USUARIO"),
-                    @Result(property = "password",      column = "CONTRASENA"),
-                    @Result(property = "rol",      column = "ROL")
+                    @Result(property = "usuario",        column = "USUARIO"),
+                    @Result(property = "password",       column = "CONTRASENA"),
+                    @Result(property = "nombreCompleto", column = "NOMBRE_COMPLETO"),
+                    @Result(property = "rol",            column = "ROL")
             }
     )
     @Select(GeneralValue.SP_GETUSUARIO)
@@ -222,10 +223,11 @@ public interface MapeoGeneral {
     @Results(
             id = "r_SP_GETUSUARIOS",
             value = {
-                    @Result(property = "idUsuario", column = "ID_USUARIO", id = true),
-                    @Result(property = "usuario",      column = "USUARIO"),
-                    @Result(property = "password",      column = "CONTRASENA"),
-                    @Result(property = "rol",      column = "ROL")
+                    @Result(property = "idUsuario",      column = "ID_USUARIO", id = true),
+                    @Result(property = "usuario",        column = "USUARIO"),
+                    @Result(property = "password",       column = "CONTRASENA"),
+                    @Result(property = "nombreCompleto", column = "NOMBRE_COMPLETO"),
+                    @Result(property = "rol",            column = "ROL")
             }
     )
     @Select(GeneralValue.SP_GETUSUARIOS)

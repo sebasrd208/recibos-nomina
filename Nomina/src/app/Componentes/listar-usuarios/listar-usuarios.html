@@ -26,8 +26,13 @@
                             <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='idUsuario' && sortDirection==='asc', 'bi-caret-down-fill':
                              sortColumn==='idUsuario' && sortDirection==='desc'}"></i>
                         </th>
+                        <th (click)="ordenarUsuarios('nombreCompleto')">
+                            Nombre completo
+                            <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='nombreCompleto' && sortDirection==='asc', 'bi-caret-down-fill':
+                             sortColumn==='nombreCompleto' && sortDirection==='desc'}"></i>
+                        </th>
                         <th (click)="ordenarUsuarios('usuario')">
-                            usuarios
+                            Usuarios
                             <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='usuario' && sortDirection==='asc', 'bi-caret-down-fill':
                              sortColumn==='usuario' && sortDirection==='desc'}"></i>
                         </th>
@@ -43,6 +48,7 @@
                     @for (usuario of usuariosFiltrados(); track $index) {
                     <tr>
                         <td> {{usuario.idUsuario}} </td>
+                        <td> {{usuario.nombreCompleto}} </td>
                         <td> {{usuario.usuario}} </td>
                         <td>
                             {{usuario.rol === Rol.ADMIN ? 'Administrador' :

@@ -145,6 +145,7 @@ public class GeneralValue {
             = "{ call PA_USUARIOS.SP_SETUSUARIO ("
             + "  #{PA_USER,     mode=IN, jdbcType=VARCHAR},"
             + "  #{PA_PASSWORD, mode=IN, jdbcType=VARCHAR},"
+            + "  #{PA_NOMBRE,   mode=IN, jdbcType=VARCHAR},"
             + "  #{PA_ROL,      mode=IN, jdbcType=VARCHAR}"
             + ")"
             + "}";
@@ -154,6 +155,7 @@ public class GeneralValue {
             + "  #{PA_ID,       mode=IN, jdbcType=VARCHAR},"
             + "  #{PA_USER,     mode=IN, jdbcType=VARCHAR},"
             + "  #{PA_PASSWORD, mode=IN, jdbcType=VARCHAR},"
+            + "  #{PA_NOMBRE,   mode=IN, jdbcType=VARCHAR},"
             + "  #{PA_ROL,      mode=IN, jdbcType=VARCHAR}"
             + ")}";
 

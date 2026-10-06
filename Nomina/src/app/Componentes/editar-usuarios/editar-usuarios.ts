@@ -24,6 +24,7 @@ export class EditarUsuarios implements OnInit {
     idUsuario: 0,
     usuario: '',
     password: '',
+    nombreCompleto: '',
     rol: Rol.USER
   }
 
@@ -49,7 +50,7 @@ export class EditarUsuarios implements OnInit {
   }
 
   editar() {
-    if (!this.usuario.usuario) {
+    if (!this.usuario.nombreCompleto || !this.usuario.usuario) {
       Swal.fire('ADVERTENCIA', 'Completa todos los campos', 'warning');
       return;
     }
