@@ -36,14 +36,14 @@ public class EmpleadoServiceTest {
             Map<String, Object> params = invocation.getArgument(0);
             params.put("rec_cursor", List.of(empleado));
             return null;
-        }).when(mapeoGeneral).SP_GET_EMPLEADO(anyMap());
+        }).when(mapeoGeneral).SP_GETNOMINA(anyMap());
 
         SueldoNetoDTO resultado =
                 service.obtenerSueldo("12345");
 
         assertNotNull(resultado);
         assertSame(empleado, resultado);
-        verify(mapeoGeneral).SP_GET_EMPLEADO(
+        verify(mapeoGeneral).SP_GETNOMINA(
                 argThat(params ->
                         "12345".equals(params.get("PA_EMPLEADO"))
                 )
@@ -57,7 +57,7 @@ public class EmpleadoServiceTest {
             Map<String, Object> params = invocation.getArgument(0);
             params.put("rec_cursor", List.of(empleado));
             return null;
-        }).when(mapeoGeneral).SP_GET_EMPLEADO(anyMap());
+        }).when(mapeoGeneral).SP_GETNOMINA(anyMap());
 
         SueldoNetoDTO resultado =
                 service.obtenerSueldoCifrado("12345");
@@ -65,7 +65,7 @@ public class EmpleadoServiceTest {
         assertNotNull(resultado);
         assertSame(empleado, resultado);
         verify(empleado).encryptFields(secretKey);
-        verify(mapeoGeneral).SP_GET_EMPLEADO(
+        verify(mapeoGeneral).SP_GETNOMINA(
                 argThat(params ->
                         "12345".equals(params.get("PA_EMPLEADO"))
                 )
@@ -90,7 +90,7 @@ public class EmpleadoServiceTest {
 
             return null;
 
-        }).when(mapeoGeneral).SP_GETEMPLEADO(anyMap());
+        }).when(mapeoGeneral).SP_GETEMPLEADOS(anyMap());
 
 
         List<EmpleadoDTO> resultado =
@@ -102,7 +102,7 @@ public class EmpleadoServiceTest {
         assertSame(empleado1, resultado.get(0));
         assertSame(empleado2, resultado.get(1));
 
-        verify(mapeoGeneral).SP_GETEMPLEADO(anyMap());
+        verify(mapeoGeneral).SP_GETEMPLEADOS(anyMap());
     }
 
     @Test
@@ -112,14 +112,14 @@ public class EmpleadoServiceTest {
             Map<String, Object> params = invocation.getArgument(0);
             params.put("rec_cursor", List.of(empleado));
             return null;
-        }).when(mapeoGeneral).SP_GETEMPLOYEE(anyMap());
+        }).when(mapeoGeneral).SP_GETEMPLEADO(anyMap());
 
         EmpleadoDTO resultado =
                 service.byNumEmpleado("12345");
 
         assertNotNull(resultado);
         assertSame(empleado, resultado);
-        verify(mapeoGeneral).SP_GETEMPLOYEE(
+        verify(mapeoGeneral).SP_GETEMPLEADO(
                 argThat(params ->
                         "12345".equals(params.get("PA_EMPLEADO"))
                 )
