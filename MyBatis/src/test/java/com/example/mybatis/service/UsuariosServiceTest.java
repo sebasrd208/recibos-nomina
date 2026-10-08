@@ -80,7 +80,6 @@ public class UsuariosServiceTest {
         verify(mapeo).SP_GETUSUARIOS(anyMap());
     }
 
-
     @Test
     void login_debeRetornarUsuarioSiPasswordEsCorrecto() {
 
@@ -105,7 +104,6 @@ public class UsuariosServiceTest {
         verify(encoder).matches("123456", "HASH123");
     }
 
-
     @Test
     void login_debeRetornarNullSiPasswordEsIncorrecto() {
 
@@ -129,7 +127,6 @@ public class UsuariosServiceTest {
         verify(encoder).matches("incorrecta", "HASH123");
     }
 
-
     @Test
     void login_debeRetornarNullSiUsuarioNoExiste() {
 
@@ -145,7 +142,6 @@ public class UsuariosServiceTest {
 
         verify(encoder, never()).matches(anyString(), anyString());
     }
-
 
     @Test
     void insertarUsuarios_debeEnviarParametrosCorrectos() {
@@ -224,7 +220,6 @@ public class UsuariosServiceTest {
         ));
     }
 
-
     @Test
     void loadUserByUsername_debeConstruirUserDetails() {
 
@@ -268,7 +263,6 @@ public class UsuariosServiceTest {
 
         assertEquals("Usuario no encontrado", exception.getMessage());
     }
-
 
     @Test
     void borrarUsuario_debeEnviarUsuarioCorrecto() {
