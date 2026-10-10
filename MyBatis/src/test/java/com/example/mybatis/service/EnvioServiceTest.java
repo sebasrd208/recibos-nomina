@@ -55,8 +55,7 @@ public class EnvioServiceTest {
     }
 
     @Test
-    void guardarPdfEnBD_debeGuardarDocumentoConStatusUno()
-            throws Exception {
+    void guardarPdfEnBD_debeGuardarDocumentoConStatusUno() throws Exception {
 
         byte[] pdf = "PDF DE PRUEBA".getBytes(StandardCharsets.UTF_8);
 
@@ -87,8 +86,7 @@ public class EnvioServiceTest {
     }
 
     @Test
-    void guardarPdfEnBD_debeGuardarStatusDosSiHayError()
-            throws Exception {
+    void guardarPdfEnBD_debeGuardarStatusDosSiHayError() throws Exception {
 
         EnvioService spyService = spy(envioService);
 
@@ -119,8 +117,7 @@ public class EnvioServiceTest {
     }
 
     @Test
-    void envioCorreoAdjunto_debeEnviarCorreoConPdf()
-            throws Exception {
+    void envioCorreoAdjunto_debeEnviarCorreoConPdf() throws Exception {
 
         byte[] pdf = "PDF DE PRUEBA".getBytes(StandardCharsets.UTF_8);
         EnvioService spyService = spy(envioService);
@@ -152,8 +149,7 @@ public class EnvioServiceTest {
     }
 
     @Test
-    void envioCorreoAdjunto_debeLanzarExceptionSiFalla()
-            throws Exception {
+    void envioCorreoAdjunto_debeLanzarExceptionSiFalla() throws Exception {
 
         EnvioService spyService = spy(envioService);
 
@@ -352,8 +348,7 @@ public class EnvioServiceTest {
     }
 
     @Test
-    void generatePdfSueldoNeto_debeRetornarNullSiNoExisteSueldo()
-            throws Exception {
+    void generatePdfSueldoNeto_debeRetornarNullSiNoExisteSueldo() throws Exception {
 
         when(service.obtenerSueldo("12345"))
                 .thenReturn(null);

@@ -39,7 +39,6 @@ public class UniversalServiceTest {
         ));
     }
 
-
     @Test
     void insertar_debeLanzarRuntimeExceptionSiFallaMapper() {
 
@@ -67,7 +66,6 @@ public class UniversalServiceTest {
 
         assertEquals("Error al insertar universal", resultado.getMessage());
     }
-
 
     @Test
     void borradoUniversal_debeEnviarNumeroEmpleadoCorrecto() {

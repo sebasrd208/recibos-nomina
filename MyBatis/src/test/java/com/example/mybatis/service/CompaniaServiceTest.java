@@ -58,7 +58,6 @@ public class CompaniaServiceTest {
         verify(mapeo).SP_GETCOMPANIA(anyMap());
     }
 
-
     @Test
     void insertarCompania_debeEnviarParametrosCorrectos() {
 

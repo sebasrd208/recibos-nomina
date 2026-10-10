@@ -214,7 +214,6 @@ public class EmpleadoServiceTest {
         );
     }
 
-
     @Test
     void actualizarEmpleados_debeLanzarRuntimeExceptionSiOracleFalla() {
 
