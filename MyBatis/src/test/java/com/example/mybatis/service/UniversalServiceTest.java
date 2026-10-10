@@ -12,15 +12,16 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataAccessResourceFailureException;
 
 @ExtendWith(MockitoExtension.class)
 public class UniversalServiceTest {
 
     @Mock
-    private MapeoGeneral mapeo;
+    MapeoGeneral mapeo;
 
     @InjectMocks
-    private UniversalService service;
+    UniversalService service;
 
     @Test
     void insertar_debeEnviarParametrosCorrectos() {
@@ -48,12 +49,10 @@ public class UniversalServiceTest {
         dto.setNumEmpleado("12345");
 
         DataAccessException exception =
-                new DataAccessException("Error BD") {
-                    @Override
-                    public Throwable getMostSpecificCause() {
-                        return new RuntimeException("Error al insertar universal");
-                    }
-                };
+                new DataAccessResourceFailureException(
+                        "ORA-20003: EL NUMERO DE EMPLEADO YA EXISTE",
+                        new RuntimeException("Error al insertar empleado")
+                );
 
         doThrow(exception)
                 .when(mapeo)
@@ -64,7 +63,7 @@ public class UniversalServiceTest {
                 () -> service.insertar(dto)
         );
 
-        assertEquals("Error al insertar universal", resultado.getMessage());
+        assertEquals("Error al insertar empleado", resultado.getMessage());
     }
 
     @Test
@@ -83,12 +82,10 @@ public class UniversalServiceTest {
     void borradoUniversal_debeLanzarRuntimeExceptionSiFallaMapper() {
 
         DataAccessException exception =
-                new DataAccessException("Error BD") {
-                    @Override
-                    public Throwable getMostSpecificCause() {
-                        return new RuntimeException("Error al borrar universal");
-                    }
-                };
+                new DataAccessResourceFailureException(
+                        "ORA-20003: NO HAY DATOS DISPONIBLES",
+                        new RuntimeException("Error al borrar empleado")
+                );
 
         doThrow(exception)
                 .when(mapeo)
@@ -99,6 +96,6 @@ public class UniversalServiceTest {
                 () -> service.borradoUniversal("12345")
         );
 
-        assertEquals("Error al borrar universal", resultado.getMessage());
+        assertEquals("Error al borrar empleado", resultado.getMessage());
     }
 }
