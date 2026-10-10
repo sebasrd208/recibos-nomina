@@ -23,13 +23,13 @@ import java.util.Map;
 public class UsuariosServiceTest {
 
     @Mock
-    private MapeoGeneral mapeo;
+    MapeoGeneral mapeo;
 
     @Mock
-    private PasswordEncoder encoder;
+    PasswordEncoder encoder;
 
     @InjectMocks
-    private UsuariosService service;
+    UsuariosService service;
 
     @Test
     void obtenerUsuario_debeRetornarUsuarioEncontrado() {
@@ -152,8 +152,8 @@ public class UsuariosServiceTest {
         dto.setNombreCompleto("Sebastian Diaz");
         dto.setRol(Rol.ADMIN);
 
-        when(encoder.encode("123456"))
-                .thenReturn("HASH123");
+        doReturn("HASH123")
+                .when(encoder).encode("123456");
 
         service.insertarUsuarios(dto);
 
@@ -207,8 +207,8 @@ public class UsuariosServiceTest {
     @Test
     void actualizarPassword_debeEnviarPasswordCifrado() {
 
-        when(encoder.encode("nueva123"))
-                .thenReturn("HASH789");
+        doReturn("HASH789")
+                .when(encoder).encode("nueva123");
 
         service.actualizarPassword("sebas", "nueva123");
 
@@ -240,7 +240,7 @@ public class UsuariosServiceTest {
         assertEquals("HASH123", resultado.getPassword());
 
         assertTrue(resultado.getAuthorities().stream()
-                .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN")));
+                .anyMatch(auth -> "ROLE_ADMIN".equals(auth.getAuthority())));
 
         verify(mapeo).SP_GETUSUARIO(argThat(params ->
                 "sebas".equals(params.get("PA_USER"))
