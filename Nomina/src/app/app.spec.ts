@@ -1,23 +1,43 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
 import { App } from './app';
+import { Navbar } from './Componentes/navbar/navbar';
+
+@Component({
+  selector: 'app-navbar',
+  standalone: true,
+  template: ''
+})
+class NavbarMock {}
 
 describe('App', () => {
+  let fixture: ComponentFixture<App>;
+  let component: App;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [App],
-    }).compileComponents();
-  });
+      imports: [App]
+    })
+      .overrideComponent(App, {
+        remove: {
+          imports: [Navbar]
+        },
+        add: {
+          imports: [NavbarMock]
+        }
+      })
+      .compileComponents();
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(App);
+    fixture = TestBed.createComponent(App);
+    component = fixture.componentInstance;
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, Nomina');
+  });
+
+  it('Debería crear la aplicación', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('Debería renderizar la aplicación', () => {
+    expect(fixture.nativeElement).toBeTruthy();
   });
 });

@@ -82,10 +82,6 @@ export class Navbar implements OnInit {
     this.router.navigate(['actualizar-password']);
   }
 
-  /*registro() {
-    this.router.navigate(['registros']);
-  }*/
-
   nuevo() {
     this.router.navigate(['guardar']);
   }
