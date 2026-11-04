@@ -40,8 +40,7 @@ public class EnvioRecibosBatchConfig {
                 }, transactionManager)
                 .build();
     }
-
-
+    
     //------- ENVIO MASIVO ----------
 
     @Bean
