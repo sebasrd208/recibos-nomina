@@ -1,4 +1,4 @@
-package com.example.mybatis.config.cifrado;
+package com.example.mybatis.cifrado;
 
 import org.springframework.context.annotation.*;
 import javax.crypto.*;

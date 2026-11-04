@@ -100,16 +100,25 @@ export class ListarDocumentos implements OnInit {
 
         setTimeout(() => {
           this.listar();
-        }, tiempoEspera + 20000);
+        }, tiempoEspera + 15000);
       },
 
       error: (error) => {
-        Swal.fire({
-          title: 'Error al programar el envío',
-          text: error.error,
-          icon: 'error',
-          confirmButtonText: 'Aceptar'
-        });
+        if (error.status === 403) {
+          Swal.fire({
+            title: 'NO AUTORIZADO',
+            text: "No cuentas con permisos de ADMINISTRADOR",
+            icon: 'warning',
+            confirmButtonText: 'Aceptar'
+          });
+        } else {
+          Swal.fire({
+            title: 'Error al programar el envío',
+            text: error.error,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
       }
     });
   }
@@ -128,7 +137,6 @@ export class ListarDocumentos implements OnInit {
     this.servidor.programarEnvioMasivo(this.fechaHoraMasiva).subscribe({
       next: (respuesta) => {
         this.mensaje = respuesta;
-
         Swal.fire({
           title: '¡Envío masivo programado!',
           text: respuesta,
@@ -140,12 +148,21 @@ export class ListarDocumentos implements OnInit {
       error: (error) => {
         this.mensaje = error.error;
 
-        Swal.fire({
-          title: 'Error al programar el envío masivo',
-          text: error.error,
-          icon: 'error',
-          confirmButtonText: 'Aceptar'
-        });
+        if (error.status === 403) {
+          Swal.fire({
+            title: 'NO AUTORIZADO',
+            text: "No cuentas con permisos de ADMINISTRADOR",
+            icon: 'warning',
+            confirmButtonText: 'Aceptar'
+          });
+        } else {
+          Swal.fire({
+            title: 'Error al programar el envío masivo',
+            text: error.error,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
       }
     });
   }

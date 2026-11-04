@@ -32,6 +32,7 @@ public class SecurityConfig {
             auth.requestMatchers(HttpMethod.GET, "/companias/**", "/documentos/**", "/empleados/**", "/universal/**")
                     .hasAnyRole("USER", "ADMIN");
             auth.requestMatchers("/companias/**", "/documentos/**", "/empleados/**", "/envios-num/**", "/universal/**").hasRole("ADMIN");
+            auth.requestMatchers("/programar-envio", "/programar-masivo").hasRole("ADMIN");
             auth.anyRequest().authenticated();
         });
 
@@ -57,7 +58,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

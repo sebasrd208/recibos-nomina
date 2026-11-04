@@ -1,6 +1,6 @@
 package com.example.mybatis.dto;
 
-import com.example.mybatis.config.cifrado.CryptoUtils;
+import com.example.mybatis.cifrado.CryptoUtils;
 import com.fasterxml.jackson.annotation.*;
 import javax.crypto.*;
 import lombok.*;

@@ -1,4 +1,4 @@
-package com.example.mybatis.config.cifrado;
+package com.example.mybatis.cifrado;
 
 import javax.crypto.spec.*;
 import javax.crypto.*;
