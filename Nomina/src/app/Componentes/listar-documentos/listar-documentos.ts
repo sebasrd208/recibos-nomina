@@ -23,10 +23,8 @@ export class ListarDocumentos implements OnInit {
   constructor(private router: Router, private servidor: Servidor) { }
 
   numEmpleado: string = '';
-
   fecha: string = '';
   hora: string = '';
-
   mensaje: string = '';
   fechaHoraMasiva: string = '';
 
