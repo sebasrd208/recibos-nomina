@@ -9,7 +9,8 @@ import io.swagger.v3.oas.annotations.tags.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.*;
 
-import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 @RestController
 @RequestMapping("/envios-num")
@@ -19,6 +20,9 @@ public class EnvioController {
 
     @Autowired
     EnvioService servicio;
+
+    @Autowired
+    EnvioRecibosProgramador recibosProgramador;
 
     @PostMapping("/pendientes")
     @Operation(summary = "Envios pendientes", description = "Envia correos con estatus 0")
@@ -60,7 +64,30 @@ public class EnvioController {
             EnvioDTO resultado = servicio.procesoEnvioCorreoPorEmpleado(numEmpleado);
             return ResponseEntity.ok(resultado);
         }catch(Exception s){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(s.getCause().getMessage().lines().findFirst().orElse("").trim());
+            String mensaje = s.getCause() != null
+                    ? s.getCause().getMessage()
+                    : s.getMessage();
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mensaje);
+        }
+    }
+
+    @PostMapping("/programar")
+    public ResponseEntity<?> programarEnvio(@RequestBody ProgramarEnvioDTO dto) {
+
+        try {
+            recibosProgramador.programarEnvio(dto.getNumEmpleado(), dto.getFechaHora());
+
+            DateTimeFormatter formatter =
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss a", Locale.US);
+
+            String fechaFormateada = dto.getFechaHora().format(formatter);
+
+            return ResponseEntity.ok("Envío programado correctamente para " + fechaFormateada);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
         }
     }
 }

@@ -125,7 +125,7 @@ public class EnvioService {
 
             servicio.actualizarDocumenctos(dto);
 
-            throw new RuntimeException("Error procesando empleado: " + numEmpleado, s);
+            throw new RuntimeException("Error procesando empleado: " + numEmpleado, s.getCause());
         }
 
         long fin = System.currentTimeMillis();
