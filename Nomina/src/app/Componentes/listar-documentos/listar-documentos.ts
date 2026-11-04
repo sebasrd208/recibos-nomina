@@ -6,6 +6,7 @@ import { Servidor } from '../../Servidor/servidor';
 import { Documento } from '../../Entidades/Documento';
 import Swal from 'sweetalert2';
 import { Envio } from '../../Entidades/Envio';
+import { ProgramarEnvio } from '../../Entidades/ProgramarEnvio';
 
 @Component({
   selector: 'app-listar-documentos',
@@ -20,6 +21,16 @@ export class ListarDocumentos implements OnInit {
   }
 
   constructor(private router: Router, private servidor: Servidor) { }
+
+  numEmpleado: string = '';
+
+  fecha: string = '';
+  hora: string = '';
+
+  mensaje: string = '';
+  fechaHoraMasiva: string = '';
+
+  programaciones: { [numEmpleado: string]: ProgramarEnvio } = {};
 
   documentos: Documento[] = [];
   resultado?: Envio;
@@ -39,6 +50,18 @@ export class ListarDocumentos implements OnInit {
     });
   }
 
+  obtenerProgramacion(numEmpleado: string): ProgramarEnvio {
+
+    if (!this.programaciones[numEmpleado]) {
+      this.programaciones[numEmpleado] = {
+        numEmpleado: numEmpleado,
+        fechaHora: ''
+      };
+    }
+
+    return this.programaciones[numEmpleado];
+  }
+
   hayPendientes(): boolean {
     return this.documentos?.some(doc => doc.status === '0');
   }
@@ -46,6 +69,87 @@ export class ListarDocumentos implements OnInit {
   guardar() {
     this.router.navigate(['guardar-documentos']);
   }
+
+  programarEnvio(numEmpleado: string): void {
+    const envio = this.programaciones[numEmpleado];
+
+    if (!envio || !envio.fechaHora) {
+
+      Swal.fire({
+        title: '¡DATOS NULOS!',
+        text: 'Selecciona una fecha y hora',
+        icon: 'warning',
+        confirmButtonText: 'Aceptar'
+      });
+      return;
+    }
+
+    this.servidor.programarEnvio(envio).subscribe({
+      next: (respuesta) => {
+        this.mensaje = respuesta;
+
+        Swal.fire({
+          title: '¡ENVÍO PROGRAMADO!',
+          text: respuesta,
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        });
+
+        const fechaEjecucion = new Date(envio.fechaHora).getTime();
+        const tiempoEspera = fechaEjecucion - Date.now();
+
+        setTimeout(() => {
+          this.listar();
+        }, tiempoEspera + 20000);
+      },
+
+      error: (error) => {
+        Swal.fire({
+          title: 'Error al programar el envío',
+          text: error.error,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+    });
+  }
+
+  programarEnvioMasivo() {
+    if (!this.fechaHoraMasiva) {
+      Swal.fire({
+        title: 'Fecha y hora requeridas',
+        text: 'Selecciona cuándo deseas ejecutar el envío masivo',
+        icon: 'warning',
+        confirmButtonText: 'Aceptar'
+      });
+      return;
+    }
+
+    this.servidor.programarEnvioMasivo(this.fechaHoraMasiva).subscribe({
+      next: (respuesta) => {
+        this.mensaje = respuesta;
+
+        Swal.fire({
+          title: '¡Envío masivo programado!',
+          text: respuesta,
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        });
+      },
+
+      error: (error) => {
+        this.mensaje = error.error;
+
+        Swal.fire({
+          title: 'Error al programar el envío masivo',
+          text: error.error,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+    });
+  }
+
   ordenarDocumentos(columna: keyof Documento) {
     if (this.sortColumn === columna) {
       this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';

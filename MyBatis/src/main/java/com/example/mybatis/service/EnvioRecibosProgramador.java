@@ -5,6 +5,7 @@ import org.springframework.batch.core.job.parameters.JobParameters;
 import org.springframework.batch.core.job.parameters.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobOperator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,12 @@ public class EnvioRecibosProgramador {
     JobOperator jobOperator;
 
     @Autowired
+    @Qualifier("envioRecibosJob")
     Job envioRecibosJob;
+
+    @Autowired
+    @Qualifier("envioMasivoJob")
+    Job envioMasivoJob;
 
     public void programarEnvio(String numEmpleado, LocalDateTime fechaHora){
 
@@ -30,13 +36,12 @@ public class EnvioRecibosProgramador {
                 .atZone(ZoneId.of("America/Mexico_City"))
                 .toInstant();
 
-        if (!fechaEjecucion.isAfter(Instant.now())) {
+        if (fechaEjecucion.isBefore(Instant.now())) {
             throw new IllegalArgumentException(
                     "La fecha debe ser posterior a la fecha actual");
         }
 
         taskScheduler.schedule(() -> {
-
             try {
                 JobParameters parametros = new JobParametersBuilder()
                         .addString("numEmpleado", numEmpleado)
@@ -48,7 +53,31 @@ public class EnvioRecibosProgramador {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }, fechaEjecucion);
+    }
 
+    public void programarEnvioMasivo(LocalDateTime fechaHora) {
+
+        Instant fechaEjecucion = fechaHora
+                .atZone(ZoneId.of("America/Mexico_City"))
+                .toInstant();
+
+        if (fechaEjecucion.isBefore(Instant.now())) {
+            throw new IllegalArgumentException(
+                    "La fecha debe ser después de la actual");
+        }
+
+        taskScheduler.schedule(() -> {
+            try {
+                JobParameters parametros = new JobParametersBuilder()
+                        .addLong("timestamp", System.currentTimeMillis())
+                        .toJobParameters();
+
+                jobOperator.start(envioMasivoJob, parametros);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }, fechaEjecucion);
     }
 

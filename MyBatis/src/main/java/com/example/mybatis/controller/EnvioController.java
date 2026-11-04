@@ -21,9 +21,6 @@ public class EnvioController {
     @Autowired
     EnvioService servicio;
 
-    @Autowired
-    EnvioRecibosProgramador recibosProgramador;
-
     @PostMapping("/pendientes")
     @Operation(summary = "Envios pendientes", description = "Envia correos con estatus 0")
     public ResponseEntity<?> enviarCorreosPendientes(){
@@ -69,25 +66,6 @@ public class EnvioController {
                     : s.getMessage();
 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mensaje);
-        }
-    }
-
-    @PostMapping("/programar")
-    public ResponseEntity<?> programarEnvio(@RequestBody ProgramarEnvioDTO dto) {
-
-        try {
-            recibosProgramador.programarEnvio(dto.getNumEmpleado(), dto.getFechaHora());
-
-            DateTimeFormatter formatter =
-                    DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss a", Locale.US);
-
-            String fechaFormateada = dto.getFechaHora().format(formatter);
-
-            return ResponseEntity.ok("Envío programado correctamente para " + fechaFormateada);
-
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(e.getMessage());
         }
     }
 }

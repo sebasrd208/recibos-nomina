@@ -5,6 +5,7 @@ import { Documento } from '../Entidades/Documento';
 import { Universal } from '../Entidades/Universal';
 import { Observable } from 'rxjs';
 import { Envio, ResultadoEnvio } from '../Entidades/Envio';
+import { ProgramarEnvio } from '../Entidades/ProgramarEnvio';
 
 @Injectable({
   providedIn: 'root',
@@ -92,6 +93,31 @@ export class Servidor {
           numEmpleado: numEmpleado
         },
         responseType: 'blob'
+      }
+    );
+  }
+
+  //--------ENVIOS PROGRAMADOS ---------------
+
+  programarEnvio(dto: ProgramarEnvio): Observable<string> {
+
+    return this.http.post(
+      this.url + '/programar-envio',
+      dto,
+      { responseType: 'text' }
+    );
+  }
+
+  programarEnvioMasivo(fechaHora: string): Observable<string> {
+
+    return this.http.post(
+      this.url + '/programar-masivo',
+      null,
+      {
+        params: {
+          fechaHora: fechaHora
+        },
+        responseType: 'text'
       }
     );
   }

@@ -1,9 +1,18 @@
 <div class="container mt-5">
     <div class="mb-2" style="user-select: none;">
         <h3 class="mb-3">DOCUMENTO</h3>
-        <div class="d-flex justify-content-end align-items-center gap-3">            
-            <button class="btn btn-success" (click)="enviarPendientes()" [disabled]="!hayPendientes()" title="Enviar correos pendientes">
+        <div class="d-flex justify-content-end align-items-center gap-3">
+            <button class="btn btn-success" (click)="enviarPendientes()" [disabled]="!hayPendientes()"
+                title="Enviar correos pendientes">
                 ENVIAR PENDIENTES
+            </button>
+
+            <input type="datetime-local" step="1" class="form-control w-auto" [(ngModel)]="fechaHoraMasiva"
+                title="Seleccionar fecha y hora" [disabled]="!hayPendientes()">
+
+            <button class="btn btn-primary" (click)="programarEnvioMasivo()" title="Programar envío masivo" [disabled]="!hayPendientes()">
+                <i class="bi bi-calendar-check"></i>
+                PROGRAMAR
             </button>
             <select class="form-select w-auto" [(ngModel)]="filtroEstado">
                 <option value="">Todos</option>
@@ -51,6 +60,7 @@
                             <i class="bi" [ngClass]="{'bi-caret-up-fill': sortColumn==='status' && sortDirection==='asc', 'bi-caret-down-fill':
                              sortColumn==='status' && sortDirection==='desc'}"></i>
                         </th>
+                        <th>PROGRAMAR ENVIO</th>
                         <th>ACCIONES</th>
                     </tr>
                 </thead>
@@ -71,15 +81,24 @@
                             }}
                         </td>
                         <td>
-                            <button class="btn btn-danger btn-sm" (click)="eliminar(documento.numEmpleado)" title="Eliminar documento">
+                            <input type="datetime-local" step="1" class="form-control form-control-sm"
+                                [(ngModel)]="obtenerProgramacion(documento.numEmpleado).fechaHora" [disabled]="documento.status === '1'">
+                            <button class="btn btn-primary btn-sm" (click)="programarEnvio(documento.numEmpleado)"
+                                [disabled]="documento.status === '1'">
+                                <i class="bi bi-calendar-check"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" (click)="eliminar(documento.numEmpleado)"
+                                title="Eliminar documento">
                                 <i class="bi bi-trash"></i>
                             </button>
                             <button class="btn btn-lg btn-warning btn-sm" (click)="enviar(documento.numEmpleado)"
                                 [disabled]="documento.status === '1'" [title]="'Enviar recibo a '+documento.nombre">
                                 <i class="bi bi-send"></i>
                             </button>
-                            <button class="btn btn-lg btn-warning btn-sm" (click)="editar(documento)" 
-                            [title]="'Editar información de '+documento.nombre">
+                            <button class="btn btn-lg btn-warning btn-sm" (click)="editar(documento)"
+                                [title]="'Editar información de '+documento.nombre">
                                 <i class="bi bi-pencil"></i>
                             </button>
                         </td>
