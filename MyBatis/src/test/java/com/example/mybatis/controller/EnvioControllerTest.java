@@ -1,22 +1,26 @@
 package com.example.mybatis.controller;
 
-import com.example.mybatis.dto.EnvioDTO;
-import com.example.mybatis.dto.ResultadoEnvioDTO;
-import com.example.mybatis.service.EnvioService;
-import jakarta.servlet.ServletOutputStream;
-import jakarta.servlet.http.HttpServletResponse;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpHeaders;
+import org.mockito.InjectMocks;
+import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.never;
+import com.example.mybatis.dto.EnvioDTO;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.doThrow;
+import jakarta.servlet.ServletOutputStream;
 import org.springframework.http.HttpStatus;
+import static org.mockito.Mockito.anyString;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import com.example.mybatis.service.EnvioService;
+import jakarta.servlet.http.HttpServletResponse;
+import com.example.mybatis.dto.ResultadoEnvioDTO;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 public class EnvioControllerTest {

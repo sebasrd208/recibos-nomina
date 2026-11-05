@@ -1,21 +1,35 @@
 package com.example.mybatis.service;
 
-import java.io.*;
-import java.awt.*;
-import java.util.*;
+import java.awt.Color;
 import java.util.List;
-import com.lowagie.text.*;
+import java.util.Base64;
+import java.io.InputStream;
+import java.util.ArrayList;
 import com.lowagie.text.Font;
-import com.example.mybatis.dto.*;
-import org.springframework.core.io.*;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.Element;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Document;
+import com.lowagie.text.Paragraph;
+import java.io.ByteArrayOutputStream;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
-import org.springframework.stereotype.*;
+import com.example.mybatis.dto.EnvioDTO;
 import jakarta.mail.internet.MimeMessage;
-import org.springframework.mail.javamail.*;
-import org.springframework.scheduling.annotation.*;
-import org.springframework.beans.factory.annotation.*;
+import com.example.mybatis.dto.DeduccionDTO;
+import com.example.mybatis.dto.DocumentoDTO;
+import com.example.mybatis.dto.EmpleadosDTO;
+import com.example.mybatis.dto.PercepcionDTO;
+import com.example.mybatis.dto.SueldoNetoDTO;
+import org.springframework.stereotype.Service;
+import com.example.mybatis.dto.ResultadoEnvioDTO;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class EnvioService {

@@ -1,20 +1,32 @@
 package com.example.mybatis.service;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
-import com.example.mybatis.dto.*;
-import jakarta.mail.Session;
-import jakarta.mail.internet.MimeMessage;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import jakarta.mail.Session;
+import org.mockito.InjectMocks;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+import com.example.mybatis.dto.EnvioDTO;
+import static org.mockito.Mockito.verify;
+import jakarta.mail.internet.MimeMessage;
+import java.nio.charset.StandardCharsets;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.doReturn;
+import com.example.mybatis.dto.DocumentoDTO;
+import static org.mockito.Mockito.doNothing;
+import com.example.mybatis.dto.ResultadoEnvioDTO;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
+import static org.mockito.ArgumentMatchers.anyString;
 import org.springframework.mail.javamail.JavaMailSender;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(MockitoExtension.class)
 public class EnvioServiceTest {

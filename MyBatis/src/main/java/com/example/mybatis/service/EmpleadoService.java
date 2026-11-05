@@ -1,13 +1,15 @@
 package com.example.mybatis.service;
 
-import java.util.*;
-import javax.crypto.*;
+import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
+import javax.crypto.SecretKey;
+import com.example.mybatis.dto.EmpleadoDTO;
 import com.example.mybatis.dto.SueldoNetoDTO;
-import org.springframework.dao.*;
-import com.example.mybatis.dto.*;
-import com.example.mybatis.mappers.*;
-import org.springframework.stereotype.*;
-import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.Service;
+import com.example.mybatis.mappers.MapeoGeneral;
+import org.springframework.dao.DataAccessException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class EmpleadoService {

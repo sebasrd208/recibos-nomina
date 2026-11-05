@@ -1,17 +1,20 @@
 package com.example.mybatis.controller;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 import java.util.List;
-import com.example.mybatis.dto.*;
-import com.example.mybatis.service.CompaniaService;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.InjectMocks;
+import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.doThrow;
+import com.example.mybatis.dto.CompaniaDTO;
 import org.springframework.http.HttpStatus;
+import static org.mockito.Mockito.doNothing;
 import org.springframework.http.ResponseEntity;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import com.example.mybatis.service.CompaniaService;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 public class CompaniaControllertTest {

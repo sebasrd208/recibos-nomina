@@ -1,18 +1,18 @@
 package com.example.mybatis.controller;
 
-import com.example.mybatis.dto.UniversalDTO;
-import com.example.mybatis.service.UniversalService;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import org.mockito.InjectMocks;
+import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.doThrow;
+import org.springframework.http.HttpStatus;
+import com.example.mybatis.dto.UniversalDTO;
+import static org.mockito.Mockito.doNothing;
+import org.springframework.http.ResponseEntity;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import com.example.mybatis.service.UniversalService;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 public class UniversalControllerTest {

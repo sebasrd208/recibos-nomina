@@ -1,13 +1,18 @@
 package com.example.mybatis.service;
 
-import java.util.*;
-import com.example.mybatis.dto.*;
-import org.springframework.dao.*;
-import com.example.mybatis.mappers.*;
-import org.springframework.stereotype.*;
-import org.springframework.security.crypto.password.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.security.core.userdetails.*;
+import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
+import com.example.mybatis.dto.UsuariosDTO;
+import org.springframework.stereotype.Service;
+import com.example.mybatis.mappers.MapeoGeneral;
+import org.springframework.dao.DataAccessException;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Service
 public class UsuariosService implements UserDetailsService {

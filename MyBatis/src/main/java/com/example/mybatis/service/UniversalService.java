@@ -1,11 +1,12 @@
 package com.example.mybatis.service;
 
-import java.util.*;
-import com.example.mybatis.dto.*;
-import org.springframework.dao.*;
-import com.example.mybatis.mappers.*;
-import org.springframework.stereotype.*;
-import org.springframework.beans.factory.annotation.*;
+import java.util.Map;
+import java.util.HashMap;
+import com.example.mybatis.dto.UniversalDTO;
+import org.springframework.stereotype.Service;
+import com.example.mybatis.mappers.MapeoGeneral;
+import org.springframework.dao.DataAccessException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class UniversalService {

@@ -1,10 +1,19 @@
 package com.example.mybatis.mappers;
 
-import org.apache.ibatis.annotations.*;
-import com.example.mybatis.values.*;
-import org.apache.ibatis.mapping.*;
-import com.example.mybatis.dto.*;
-import java.util.*;
+import java.util.Map;
+import com.example.mybatis.dto.UsuariosDTO;
+import com.example.mybatis.dto.EmpleadoDTO;
+import com.example.mybatis.dto.CompaniaDTO;
+import com.example.mybatis.dto.DocumentoDTO;
+import org.apache.ibatis.annotations.Result;
+import com.example.mybatis.dto.SueldoNetoDTO;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
+import com.example.mybatis.values.GeneralValue;
+import org.apache.ibatis.mapping.StatementType;
+import org.apache.ibatis.annotations.ResultType;
 
 @Mapper
 public interface MapeoGeneral {

@@ -1,6 +1,6 @@
 package com.example.mybatis.dto;
 
-import lombok.*;
+import lombok.Data;
 
 @Data
 public class EmpleadoDTO {

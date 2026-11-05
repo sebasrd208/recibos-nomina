@@ -1,17 +1,16 @@
 package com.example.mybatis.service;
 
+import java.time.ZoneId;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import org.springframework.batch.core.job.Job;
-import org.springframework.batch.core.job.parameters.JobParameters;
-import org.springframework.batch.core.job.parameters.JobParametersBuilder;
+import org.springframework.stereotype.Service;
+import org.springframework.scheduling.TaskScheduler;
 import org.springframework.batch.core.launch.JobOperator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.scheduling.TaskScheduler;
-import org.springframework.stereotype.Service;
-
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import org.springframework.batch.core.job.parameters.JobParameters;
+import org.springframework.batch.core.job.parameters.JobParametersBuilder;
 
 @Service
 public class EnvioRecibosProgramador {
@@ -50,8 +49,9 @@ public class EnvioRecibosProgramador {
 
                 jobOperator.start(envioRecibosJob, parametros);
 
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception s) {
+                throw new RuntimeException(
+                        "Ocurrió un error inesperado: "+s.getMessage());
             }
         }, fechaEjecucion);
     }
@@ -75,8 +75,9 @@ public class EnvioRecibosProgramador {
 
                 jobOperator.start(envioMasivoJob, parametros);
 
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception s) {
+                throw new RuntimeException(
+                        "Ocurrió un error inesperado: "+s.getMessage());
             }
         }, fechaEjecucion);
     }
