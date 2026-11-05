@@ -4,25 +4,18 @@ import jakarta.servlet.http.*;
 import com.example.mybatis.dto.*;
 import org.springframework.http.*;
 import com.example.mybatis.service.*;
-import io.swagger.v3.oas.annotations.*;
-import io.swagger.v3.oas.annotations.tags.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.*;
-
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 @RestController
 @RequestMapping("/envios-num")
 @CrossOrigin
-@Tag(name = "API DE ENVIOS", description = "API PARA ENVIOS")
 public class EnvioController {
 
     @Autowired
     EnvioService servicio;
 
     @PostMapping("/pendientes")
-    @Operation(summary = "Envios pendientes", description = "Envia correos con estatus 0")
     public ResponseEntity<?> enviarCorreosPendientes(){
         try {
             ResultadoEnvioDTO resultado = servicio.procesoEnvioCorreos();
@@ -33,7 +26,6 @@ public class EnvioController {
     }
 
     @PatchMapping("/sueldo/pdf")
-    @Operation(summary = "Mostrar sueldo neto", description = "Muestra un sueldo neto de un empleado especifico")
     public ResponseEntity<?> generarPdfSueldo(@RequestParam String numEmpleado, HttpServletResponse response) {
         try {
             byte[] pdfBytes = servicio.generatePdfSueldoNeto(numEmpleado);
@@ -54,7 +46,6 @@ public class EnvioController {
     }
 
     @PostMapping("/pendiente")
-    @Operation(summary = "Envios pendientes", description = "Envia correos con estatus 0")
     public ResponseEntity<?> enviarCorreosPorEmpleado(@RequestParam String numEmpleado){
 
         try {

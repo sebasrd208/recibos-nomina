@@ -4,22 +4,18 @@ import java.util.*;
 import com.example.mybatis.dto.*;
 import org.springframework.http.*;
 import com.example.mybatis.service.*;
-import io.swagger.v3.oas.annotations.*;
-import io.swagger.v3.oas.annotations.tags.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.*;
 
 @RestController
 @RequestMapping("/companias")
 @CrossOrigin
-@Tag(name = "EMPRESAS", description = "API PARA EMPRESAS")
 public class CompaniaController {
         
     @Autowired
     CompaniaService servicio;
     
     @GetMapping("/mostrar")
-    @Operation(summary = "Mostrar Empresas", description = "Muestra todos los empresas registradas")
     public ResponseEntity<?> mostrarCompanias() {
         try {
             List<CompaniaDTO> lista = servicio.obtenerCompanias();
@@ -30,7 +26,6 @@ public class CompaniaController {
     }
     
     @PostMapping("/guardar")
-    @Operation(summary = "Registrar empresa", description = "Registra una nueva empresa")
     public ResponseEntity<?> guardar(@RequestBody CompaniaDTO dto) {
         try {            
             servicio.insertarCompania(dto);
@@ -41,7 +36,6 @@ public class CompaniaController {
     }
     
     @GetMapping("/buscar")
-    @Operation(summary = "Mostrar datos de la empresa", description = "Se obtienen datos de la empresa donde trabaja esta persona")
     public ResponseEntity<?> mostrarEmpresa(@RequestParam String numEmpleado){
         try {
             CompaniaDTO usuario = servicio.obtenerEmpleados(numEmpleado);

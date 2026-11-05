@@ -4,22 +4,18 @@ import java.util.*;
 import com.example.mybatis.dto.*;
 import org.springframework.http.*;
 import com.example.mybatis.service.*;
-import io.swagger.v3.oas.annotations.*;
-import io.swagger.v3.oas.annotations.tags.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.*;
 
 @RestController
 @RequestMapping("/usuarios")
 @CrossOrigin
-@Tag(name = "API DE USUARIOS", description = "API para el registro de usuarios")
 public class UsuariosController {
 
     @Autowired
     UsuariosService service;
 
     @PostMapping("/guardar")
-    @Operation(summary = "Registrar usuario", description = "Registra un nueva usuario")
     public ResponseEntity<?> guardar(@RequestBody UsuariosDTO dto) {
         try {
             service.insertarUsuarios(dto);
@@ -30,7 +26,6 @@ public class UsuariosController {
     }
 
     @PutMapping("/editar")
-    @Operation(summary = "Actualizar usuario", description = "Actualiza los datos de un usuario existente")
     public ResponseEntity<?> editar(@RequestBody UsuariosDTO dto) {
         try {
             service.actualizarUsuarios(dto);
@@ -41,7 +36,6 @@ public class UsuariosController {
     }
 
     @PutMapping("/actualizar-password")
-    @Operation(summary = "Actualizar usuario", description = "Actualiza los datos de un usuario existente")
     public ResponseEntity<?> actualizarPassword(@RequestParam String username, @RequestParam String password){
         try {
             service.actualizarPassword(username, password);
@@ -52,7 +46,6 @@ public class UsuariosController {
     }
 
     @GetMapping("/username")
-    @Operation(summary = "Mostrar usuario", description = "Muestra los datos del usuario")
     public ResponseEntity<?> mostrarUsuario(@RequestParam String usuario) {
         try {
             UsuariosDTO username = service.obtenerUsuario(usuario);
@@ -63,7 +56,6 @@ public class UsuariosController {
     }
 
     @GetMapping
-    @Operation(summary = "Mostrar usuario", description = "Muestra los datos del usuario")
     public ResponseEntity<?> mostrarUsuarios() {
         try {
             List<UsuariosDTO> usuarios = service.obtenerUsuarios();
@@ -74,7 +66,6 @@ public class UsuariosController {
     }
 
     @PostMapping("/login")
-    @Operation(summary = "Autenticación de usuarios", description = "Autentica los usuario y verifica los roles de tal usuario")
     public ResponseEntity<?> login(@RequestParam String usuario, @RequestParam String password) {
         try {
             UsuariosDTO username = service.login(usuario, password);
@@ -90,7 +81,6 @@ public class UsuariosController {
     }
 
     @DeleteMapping("/eliminar")
-    @Operation(summary = "Eliminar usuario", description = "Elimina un usuario existente")
     public ResponseEntity<?> eliminar(@RequestParam String username) {
         try {
             service.borrarUsuario(username);

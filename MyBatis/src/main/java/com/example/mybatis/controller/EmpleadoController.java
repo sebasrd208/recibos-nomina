@@ -4,15 +4,12 @@ import java.util.*;
 import com.example.mybatis.dto.*;
 import org.springframework.http.*;
 import com.example.mybatis.service.*;
-import io.swagger.v3.oas.annotations.*;
-import io.swagger.v3.oas.annotations.tags.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.*;
 
 @RestController
 @RequestMapping("/empleados")
 @CrossOrigin
-@Tag(name = "EMPLEADOS", description = "API PARA EMPLEADOS")
 public class EmpleadoController {
 
     @Autowired
@@ -22,7 +19,6 @@ public class EmpleadoController {
     EnvioService servicioE;
 
     @GetMapping("/mostrar")
-    @Operation(summary = "Mostrar Información", description = "Muestra todos los empleados registradas")
     public ResponseEntity<?> mostrar() {
         try {
             List<EmpleadoDTO> lista = servicio.obtenerEmpleados();
@@ -33,7 +29,6 @@ public class EmpleadoController {
     }
 
     @GetMapping("/sueldo")
-    @Operation(summary = "Mostrar sueldo neto", description = "Muestra un sueldo neto de un empleado especifico")
     public ResponseEntity<?> mostrarSueldo(@RequestParam String numEmpleado) {
         try {
             SueldoNetoDTO usuario = servicio.obtenerSueldo(numEmpleado);
@@ -44,7 +39,6 @@ public class EmpleadoController {
     }
 
     @GetMapping("/buscar")
-    @Operation(summary = "Buscar empleado", description = "Muestra los datos de un empleado especifico")
     public ResponseEntity<?> buscar(@RequestParam String numEmpleado) {
         try {
             EmpleadoDTO usuario = servicio.byNumEmpleado(numEmpleado);
@@ -55,7 +49,6 @@ public class EmpleadoController {
     }
 
     @PostMapping("/guardar")
-    @Operation(summary = "Registrar empleado", description = "Registra un nueva empleado")
     public ResponseEntity<?> guardar(@RequestBody EmpleadoDTO dto) {
         try {
             servicio.insertarEmpleados(dto);
@@ -66,7 +59,6 @@ public class EmpleadoController {
     }
 
     @PutMapping("/actualizar")
-    @Operation(summary = "Actualizar empleado", description = "Actualiza un nueva empleado existente")
     public ResponseEntity<?> actualizar(@RequestBody EmpleadoDTO dto) {
         try {
             servicio.actualizarEmpleados(dto);
@@ -77,7 +69,6 @@ public class EmpleadoController {
     }
 
     @PostMapping("/enviar")
-    @Operation(summary = "Correo con archivo adjunto", description = "Este prueba envia un correo con un archivo adjunto")
     public ResponseEntity<String> enviarCorreo(@RequestParam String correo, @RequestParam String nombre) {
         try {
             servicioE.envioCorreoAdjunto(correo, nombre);
