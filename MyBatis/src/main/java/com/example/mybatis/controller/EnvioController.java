@@ -1,11 +1,19 @@
 package com.example.mybatis.controller;
 
-import jakarta.servlet.http.*;
-import com.example.mybatis.dto.*;
-import org.springframework.http.*;
-import com.example.mybatis.service.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.*;
+import com.example.mybatis.dto.EnvioDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import jakarta.servlet.http.HttpServletResponse;
+import com.example.mybatis.service.EnvioService;
+import com.example.mybatis.dto.ResultadoEnvioDTO;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
 @RequestMapping("/envios-num")

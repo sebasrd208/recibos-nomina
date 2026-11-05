@@ -18,7 +18,7 @@ import org.springframework.security.config.annotation.method.configuration.*;
 public class SecurityConfig {
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf(csrf -> {
             csrf.disable();

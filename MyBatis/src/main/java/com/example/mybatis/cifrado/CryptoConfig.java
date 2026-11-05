@@ -1,7 +1,8 @@
 package com.example.mybatis.cifrado;
 
-import org.springframework.context.annotation.*;
-import javax.crypto.*;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Bean;
+import javax.crypto.SecretKey;
 
 @Configuration
 public class CryptoConfig {
