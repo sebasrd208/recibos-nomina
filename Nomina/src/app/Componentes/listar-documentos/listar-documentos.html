@@ -84,7 +84,7 @@
                             <input type="datetime-local" step="1" class="form-control form-control-sm"
                                 [(ngModel)]="obtenerProgramacion(documento.numEmpleado).fechaHora" [disabled]="documento.status === '1'">
                             <button class="btn btn-primary btn-sm" (click)="programarEnvio(documento.numEmpleado)"
-                                [disabled]="documento.status === '1'">
+                                [disabled]="documento.status === '1'" [title]="'Programar envio de recibo a '+documento.nombre">
                                 <i class="bi bi-calendar-check"></i>
                             </button>
                         </td>

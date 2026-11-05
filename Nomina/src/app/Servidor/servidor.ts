@@ -100,7 +100,6 @@ export class Servidor {
   //--------ENVIOS PROGRAMADOS ---------------
 
   programarEnvio(dto: ProgramarEnvio): Observable<string> {
-
     return this.http.post(
       this.url + '/programar-envio',
       dto,
@@ -109,7 +108,6 @@ export class Servidor {
   }
 
   programarEnvioMasivo(fechaHora: string): Observable<string> {
-
     return this.http.post(
       this.url + '/programar-masivo',
       null,

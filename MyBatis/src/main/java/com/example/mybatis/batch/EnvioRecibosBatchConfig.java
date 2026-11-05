@@ -15,6 +15,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 public class EnvioRecibosBatchConfig {
 
     // ------------ENVIO POR EMPLEADO -------------
+
     @Bean
     public Job envioRecibosJob(JobRepository jobRepository, Step envioRecibosStep){
 
@@ -40,7 +41,7 @@ public class EnvioRecibosBatchConfig {
                 }, transactionManager)
                 .build();
     }
-    
+
     //------- ENVIO MASIVO ----------
 
     @Bean
@@ -56,6 +57,7 @@ public class EnvioRecibosBatchConfig {
     public Step envioMasivoStep(JobRepository repository, PlatformTransactionManager manager, EnvioService service){
         return new StepBuilder("envioMasivoStep", repository)
           .tasklet((contribution, chunkContext) -> {
+
             service.procesoEnvioCorreos();
 
             return RepeatStatus.FINISHED;
