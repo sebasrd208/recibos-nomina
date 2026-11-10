@@ -36,7 +36,7 @@ export class EditarCompanias implements OnInit{
 
     this.servidor.buscarCompania(id).subscribe({
       next: (dato) => {
-        this.company = dato;      
+        this.company = dato;    
         console.log(JSON.stringify(dato));
         Swal.fire({
           title: 'CARGA EXITOSA',

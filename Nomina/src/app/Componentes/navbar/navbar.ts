@@ -83,6 +83,11 @@ export class Navbar implements OnInit {
   }
 
   nuevo() {
+    if(!this.isAdmin()){
+      Swal.fire('NO AUTORIZADO', 'No tienes permiso de ADMINISTRADOR', 'warning');
+      return;
+    }
+    
     this.router.navigate(['guardar']);
   }
 }

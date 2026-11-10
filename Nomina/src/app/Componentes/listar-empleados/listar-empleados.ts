@@ -66,6 +66,10 @@ export class ListarEmpleados implements OnInit {
   }
 
   eliminar(numEmpleado: string) {
+    if(!this.isAdmin()){
+      Swal.fire('NO AUTORIZADO', 'No tienes permiso de ADMINISTRADOR', 'warning');
+      return;
+    }
     Swal.fire({
       title: '¿Eliminar dato?',
       text: 'Esta accion no se puede deshacer',
@@ -127,6 +131,10 @@ export class ListarEmpleados implements OnInit {
   }
 
   editar(empleado_x: Empleado) {
+    if(!this.isAdmin()){
+      Swal.fire('NO AUTORIZADO', 'No tienes permiso de ADMINISTRADOR', 'warning');
+      return;
+    }
     localStorage.setItem('empleado_key', empleado_x.numEmpleado);
     this.router.navigate(['editar-empleados']);
   }

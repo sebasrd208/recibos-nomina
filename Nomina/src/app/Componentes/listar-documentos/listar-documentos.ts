@@ -7,6 +7,7 @@ import { Documento } from '../../Entidades/Documento';
 import Swal from 'sweetalert2';
 import { Envio } from '../../Entidades/Envio';
 import { ProgramarEnvio } from '../../Entidades/ProgramarEnvio';
+import { AuthService } from '../../Servidor/auth.service';
 
 @Component({
   selector: 'app-listar-documentos',
@@ -20,7 +21,7 @@ export class ListarDocumentos implements OnInit {
     this.listar();
   }
 
-  constructor(private router: Router, private servidor: Servidor) { }
+  constructor(private router: Router, private servidor: Servidor, private auth: AuthService) { }
 
   numEmpleado: string = '';
   fecha: string = '';
@@ -64,11 +65,11 @@ export class ListarDocumentos implements OnInit {
     return this.documentos?.some(doc => doc.status === '0');
   }
 
-  guardar() {
-    this.router.navigate(['guardar-documentos']);
-  }
-
-  programarEnvio(numEmpleado: string): void {
+  programarEnvio(numEmpleado: string) {
+    if(!this.isAdmin()){
+      Swal.fire('NO AUTORIZADO', 'No tienes permiso de ADMINISTRADOR', 'warning');
+      return;
+    }
     const envio = this.programaciones[numEmpleado];
 
     if (!envio || !envio.fechaHora) {
@@ -122,6 +123,10 @@ export class ListarDocumentos implements OnInit {
   }
 
   programarEnvioMasivo() {
+    if(!this.isAdmin()){
+      Swal.fire('NO AUTORIZADO', 'No tienes permiso de ADMINISTRADOR', 'warning');
+      return;
+    }
     if (!this.fechaHoraMasiva) {
       Swal.fire({
         title: 'Fecha y hora requeridas',
@@ -190,6 +195,11 @@ export class ListarDocumentos implements OnInit {
   }
 
   eliminar(numEmpleado: string) {
+    if(!this.isAdmin()){
+      Swal.fire('NO AUTORIZADO', 'No tienes permiso de ADMINISTRADOR', 'warning');
+      return;
+    }
+    
     Swal.fire({
       title: '¿Eliminar dato?',
       text: 'Esta accion no se puede deshacer',
@@ -217,6 +227,11 @@ export class ListarDocumentos implements OnInit {
   }
 
   enviar(numEmpleado: string) {
+    if(!this.isAdmin()){
+      Swal.fire('NO AUTORIZADO', 'No tienes permiso de ADMINISTRADOR', 'warning');
+      return;
+    }
+
     Swal.fire({
       title: 'Enviando correo...',
       text: 'Por favor espera',
@@ -254,6 +269,11 @@ export class ListarDocumentos implements OnInit {
   }
 
   enviarPendientes() {
+    if(!this.isAdmin()){
+      Swal.fire('NO AUTORIZADO', 'No tienes permiso de ADMINISTRADOR', 'warning');
+      return;
+    }
+
     Swal.fire({
       title: 'Enviando correos...',
       text: 'Por favor espera',
@@ -323,8 +343,17 @@ export class ListarDocumentos implements OnInit {
   }
 
   editar(documento_x: Documento) {
+    if(!this.isAdmin()){
+      Swal.fire('NO AUTORIZADO', 'No tienes permiso de ADMINISTRADOR', 'warning');
+      return;
+    }
+
     localStorage.setItem('documento_key', documento_x.numEmpleado);
     this.router.navigate(['editar-documentos']);
+  }
+
+  isAdmin() {
+    return this.auth.isAdmin();
   }
 
   documentosFiltrados(): Documento[] {

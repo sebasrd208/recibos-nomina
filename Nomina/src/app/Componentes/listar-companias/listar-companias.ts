@@ -5,6 +5,7 @@ import { Servidor } from '../../Servidor/servidor';
 import { Router } from '@angular/router';
 import { Compania } from '../../Entidades/Empleado';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../Servidor/auth.service';
 
 @Component({
   selector: 'app-listar-companias',
@@ -18,7 +19,7 @@ export class ListarCompanias implements OnInit {
     this.listar();
   }
 
-  constructor(private router: Router, private servidor: Servidor){}
+  constructor(private router: Router, private servidor: Servidor, private auth: AuthService){}
 
   companias: Compania[] = [];
   sortColumn: keyof Compania = 'idCompania';
@@ -61,6 +62,11 @@ export class ListarCompanias implements OnInit {
   }
 
   eliminar(numEmpleado: string) {
+    if(!this.isAdmin()){
+      Swal.fire('NO AUTORIZADO', 'No tienes permiso de ADMINISTRADOR', 'warning');
+      return;
+    }
+
     Swal.fire({
       title: '¿Eliminar dato?',
       text: 'Esta accion no se puede deshacer',
@@ -88,7 +94,16 @@ export class ListarCompanias implements OnInit {
   }
 
   editar(compania_x: Compania) {
+    if(!this.isAdmin()){
+      Swal.fire('NO AUTORIZADO', 'No tienes permiso de ADMINISTRADOR', 'warning');
+      return;
+    }
+
     localStorage.setItem('compania_key', compania_x.numEmpleado);
     this.router.navigate(['editar-companias']);
+  }
+
+  isAdmin() {
+    return this.auth.isAdmin();
   }
 }
