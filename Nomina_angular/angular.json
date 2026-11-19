@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Nomina": {
+    "Nomina_angular": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -60,10 +60,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Nomina:build:production"
+              "buildTarget": "Nomina_angular:build:production"
             },
             "development": {
-              "buildTarget": "Nomina:build:development"
+              "buildTarget": "Nomina_angular:build:development"
             }
           },
           "defaultConfiguration": "development"
