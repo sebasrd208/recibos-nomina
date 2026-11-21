@@ -2,7 +2,7 @@
 import { crearAxios } from './axiosConfig';
 
 //const servidorApi = crearAxios('http://localhost:8090');
-const servidorApi = crearAxios('http://192.168.1.68:8090');
+const servidorApi = crearAxios('http://192.168.1.69:8090');
 
 export const servidorApiMethods = {
   

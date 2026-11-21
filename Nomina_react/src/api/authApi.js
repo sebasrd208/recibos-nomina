@@ -1,6 +1,6 @@
 import { crearAxios } from './axiosConfig';
 
-const axiosConfig = crearAxios('http://192.168.1.68:8090/usuarios');
+const axiosConfig = crearAxios('http://192.168.1.69:8090/usuarios');
 //const axiosConfig = crearAxios('http://localhost:8090/usuarios');
 
 export const authApi = {

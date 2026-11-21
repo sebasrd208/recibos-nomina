@@ -1,8 +1,8 @@
 {
   "appId": "com.example.app",
-  "appName": "Nomina",
+  "appName": "Nomina_react",
   "webDir": "dist",
   "server": {
-  "androidScheme": "http"
-}
+    "androidScheme": "http"
+  }
 }
